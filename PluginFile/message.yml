@@ -1,0 +1,303 @@
+#________                     ___________                            __  .__       .__
+# /  _____/______   ______  _  _\_   _____/ ______ ______ ____   _____/  |_|__|____  |  |   ______
+#/   \  __\_  __ \_/ __ \ \/ \/ /|    __)_ /  ___//  ___// __ \ /    \   __\  \__  \ |  |  /  ___/
+#\    \_\  \  | \/\  ___/\     / |        \\___ \ \___ \\  ___/|   |  \  | |  |/ __ \|  |__\___ \ v
+# \______  /__|    \___  >\/\_/ /_______  /____  >____  >\___  >___|  /__| |__(____  /____/____  >
+#        \/            \/               \/     \/     \/     \/     \/             \/          \/
+
+#配置文件版本 （不要修改）
+version: 1.0.0
+#配置文件版本 （不要修改）
+
+#当服务器中没有要执行操作的在线玩家时，发送给玩家的信息。
+NoHavePlayer: "$prefix&c服务器上没有可执行操作的在线玩家！"
+#当某种指令只能由玩家执行时，发送给控制台的信息。
+OnlyPlayer: "$prefix&c&l只有玩家才可以执行此命令！"
+#当服务器中没有指定要执行操作的玩家时，发送给玩家的信息。
+NotOnline: "$prefix&c玩家 &e$playername &c不在线！"
+#当玩家没有权限时，发送给玩家的信息。
+DoNotHavePerMission: "$prefix&c你不能这么做！"
+#该插件的全局前缀
+Prefix: "&b&l[$pluginname] "
+
+DataBase:
+  CopyToOtherDatabase: "&c开始复制源数据库中的表 $table ..."
+  CopyToOtherDatabaseSuccess: "&a成功从 $table 中复制 $order 条数据到 $des ..."
+  CreateDatabaseTableError: "&c创建数据表 $table 异常(内部方法)..."
+  DatabaseError: "&c数据库操作出错"
+  DatabaseFile: "&c数据库文件: $file"
+  DatabaseUnLoadError: "&c数据库卸载出现异常"
+  SQLCheck: "&cSQL查询语句："
+  CheckTableNameError: "&c判断 表名: $table 是否存在时错误！"
+  CheckTableNameAndKeyError: "&c判断 表名: $table 字段名: $key 是否存在时错误！"
+  DatabaseLoadError: "&c数据库初始化失败 请检查驱动 $driver 是否存在!"
+  DatabaseCreateFailed: "&c数据库文件 $table 创建失败！"
+  DatabaseLoginError: |-
+    &c数据库操作出错: $reason
+    &b登录URL: $url
+    &b登录账户: $username
+    &b登录密码: $password
+
+Help:
+  Usage: "$prefix&7/GrewEssentials"
+  Usage_Explanation: "查看插件帮助"
+  Mid: "&6»"
+  #Help最前面的显示内容和最后面的显示内容 "\n"换行
+  #$prefix加或者不加都无所谓，因为检测的时候会将Prefix自动加上，然后$prefix会被替换
+  Help_First_Message: "§7===== §6[ §e§lGrewEntails §6] &b<$page_now/$page_all>§7====="
+  Previous: "§7=====§b <<<&e 上一页 &b>>> §7====="
+  Next_Page: "§7=====§b <<<&e 下一页 &b>>> §7====="
+  Cant_Find: "$prefix&c指定的页面不存在！"
+
+Version:
+  Message: "$prefix&c当前$pluginname插件版本为 &a&l$version"
+
+Reload:
+  #重载成功的提示信息。
+  Message: "$prefix&a$pluginname插件已重载并且自动备份！"
+  File: "$prefix&a$pluginname插件已重载配置 &b$file &a并且自动备份！"
+  Database: "$prefix&a你已成功重载数据库！"
+  Usage: "$prefix&7/greload filetype <File>"
+  Usage_Explanation: "重载配置文件"
+  #如果在重载时这里选择false，则不会重载插件， 但是同样，也不会重载js
+  ReloadPlugin: false
+
+#Gamemode[模式]的所有提示内容和配置项
+Gamemode:
+  #是否启用整个模块 true启用，false禁用
+  Enable: true
+
+  #生存栏[0]
+  Survival:
+    Type: "生存"
+  #创造栏[1]
+  Creative:
+    Type: "创造"
+  #冒险栏[2]
+  Adventure:
+    Type: "冒险"
+  #观察者栏[3]
+  Spectator:
+    Type: "观察者"
+
+  Usage: "$prefix&7/Gamemode <模式> <玩家> "
+  Usage_Explanation: "将某位玩家的游戏模式修改"
+  Message: "$prefix&c已设置玩家&e$playername&c的模式为$type！"
+  Presence_Message: "$prefix&c玩家&e$playername&c的模式已经为$type！"
+
+#InvSee的所有提示内容和配置项
+InvSee:
+  #是否启用整个模块 true启用，false禁用
+  Enable: true
+
+  Usage: "$prefix&7/InvSee <玩家>"
+  Usage_Explanation: "查看某位玩家的背包"
+  Message: "$prefix&c已打开玩家&e$playername&c的背包！"
+
+#Sucide的所有提示内容和配置项
+Sucide:
+  #是否启用整个模块 true启用，false禁用
+  Enable: true
+
+  Usage: "$prefix&7/Sucide"
+  Usage_Explanation: "自杀"
+  BroadCast: true
+  BroadCastMessage: "$prefix&e玩家$playername结束了他/她/它罪恶的一生"
+  Message: "$prefix&e你结束你罪恶的一生"
+
+#Light[雷击某人]的所有提示内容和配置项
+Light:
+  #是否启用整个模块 true启用，false禁用
+  Enable: true
+  #单独攻击某个玩家，发送给玩家/控制台的信息。
+  Alone:
+    #是否启用这个模块 true启用，false禁用
+    Enable: true
+    Usage: "$prefix&7/Light <名称> <true/false>"
+    Usage_Explanation: "使用雷击飞指定的目标。"
+    Message: "$prefix&c已击中$playername！"
+
+  #攻击所有玩家，发送给玩家/控制台的信息。
+  All:
+    #是否启用这个模块 true启用，false禁用
+    Enable: true
+    Usage: "$prefix&7/Lighta <true/false>"
+    Usage_Explanation: "使用雷击飞服务器在线的所有玩家。"
+    Message: "$prefix&c已击中当前服务器在线的所有玩家！"
+
+  #攻击玩家时，是否将玩家击飞的所有配置文件
+  Fly:
+    Enable: true
+    #此选项将默认选择是否在此次的攻击中是否会击飞玩家；
+    #此选项必须在上面的Enable启用中才可以运行！
+    Default: true
+    
+#Announcement[公告]的所有提示内容和配置项
+Announcement:
+  Enable: true
+  Usage: "$prefix&7/Announcement <消息>"
+  Usage_Explanation: "让所有玩家以公告的形式看见这个消息"
+  Prefix: "&e[&a服务器公告&e] "
+
+#BoardCast的所有提示内容和配置项
+BroadCast:
+  Enable: true
+  Usage: "$prefix&7/BroadCast <消息>"
+  Usage_Explanation: "让所有玩家都看见这个消息"
+
+#Kick[踢出玩家]的所有提示内容和配置项
+KickAll:
+  #是否启用整个模块 true启用，false禁用
+  Enable: true
+
+  #是否连自己也踢出 true为开启判断
+  #默认为不踢
+  KickExceptSelf: true
+
+  Usage: "$prefix&7/Kickall"
+  Usage_Explanation: "踢出服务器在线除您以外的所有玩家"
+
+  #当踢出所有玩家时，发送给玩家/控制台信息。
+  All: "$prefix&c已成功踢出所有玩家！"
+
+  #当踢出所有玩家时，输入的指令中没有原因，将代替默认的原因。
+  Default: "&f以鼓励作弊或违规的方式讨论或行事。"
+
+  #当踢出所有玩家后，在玩家的游戏界面上显示的内容。
+  Message_Gui: |+
+    &c你被踢出此服务器!
+
+    &7原因:&f$reason
+
+#Fly[飞行]的所有提示内容和配置项
+Fly:
+  #是否启用整个模块 true启用，false禁用
+  Enable: true
+
+  Usage: "$prefix&7/Fly <名称>"
+  Usage_Explanation: "设置某人或自身的飞行状态开启/关闭"
+
+  #是否启用持续飞行，即重进游戏后，玩家依旧处于飞行状态。
+  Fly_Allow: true
+
+  #在启用持续飞行时，是否判断拥有权限，如果拥有权限则飞行，如果没有拥有权限则不将持续飞行。
+  #此操作必须在上一步Fly_Allow启用的情况下才能使用。
+  Fly_Permission: true
+
+  #当设置自身/他人的飞行状态开启时，发送给玩家/控制台的信息。
+  Enable_Message: "$prefix&c已设置&e$playername&c的飞行状态开启！"
+
+  #当设置自身/他人的飞行状态关闭时，发送给玩家/控制台的信息。
+  Disable_Message: "$prefix&c已设置&e$playername&c的飞行状态关闭！"
+
+  #当设置自身/他人的飞行状态关闭时，当玩家的模式为创造时，发送给玩家/控制台的信息。
+  Gamemode_Creative: "$prefix&c玩家&e$playername&c的模式为创造，无法将其飞行状态关闭！"
+
+  #当设置自身/他人的飞行状态关闭时，当玩家的模式为创造时，发送给玩家/控制台的信息。
+  Gamemode_Spectator: "$prefix&c玩家&e$playername&c的模式为观察者，无法将其飞行状态关闭！"
+
+Hat:
+  Enable: true
+  None: "$prefix&c您放在头上的物品的数量必须为1或不为空气"
+  Success: "$prefix&c您已成功将您手上的物品放置在您的头上"
+
+ServerManager:
+  Usage: "$prefix&7/server timings/info"
+  Usage_Explanation: "检测服务器报告"
+
+  Timings:
+    Start: "$prefix&c开始记录服务器性能，过段时间后输入/server timings paste"
+    Paste: "$prefix&c开始打印服务器性能报告..."
+    PasteSuccess: "$prefix&a服务器报告以打印 >> &b$url"
+    PasteFailed: "$prefix&c服务器报告打印失败！前往后台查看详情"
+    Stop: "$prefix&c已停止记录服务器性能报告！"
+
+#Vanish[隐身]的所有提示内容和配置项
+Vanish:
+  Enable: true
+  Usage: "$prefix&7/Vanish"
+  Usage_Explanation: "使玩家隐身"
+  #保持隐身状态
+  Vanish_Allow: true
+  #是否发送ActionBar
+  SendActionBar: true
+  #发送的ActionBar
+  ActionBar: "&c你目前已经隐身了"
+  #是否当隐身的玩家关闭隐身时，发送信息
+  BroadCast: true
+  JoinMessage: "&e$playername joined the game"
+  LeftMessage: "&e$playername left the game"
+  Message_Enable: "$prefix&c已设置玩家&e$playername&c的隐身模式开启！"
+  Message_Disable: "$prefix&c已设置玩家&e$playername&c的隐身模式关闭！"
+
+Warp:
+  Enable: true
+  Usage: "$prefix&7/Warp"
+  Usage_Explanation: "使玩家传送到已设置的坐标"
+  Failed: "$prefix&c未知坐标$warpname，无法传送！"
+  Success: "$prefix&c您已传送至坐标$warpname！"
+
+SetWarp:
+  Usage: "$prefix&7/SetWarp"
+  Usage_Explanation: "设置玩家传送的坐标"
+  Success: "$prefix&c设置坐标$warpname成功！"
+  Failed: "$prefix&c设置坐标失败，未知原因"
+
+RemoveWarp:
+  Usage: "$prefix&7/RemoveWarp"
+  Usage_Explanation: "删除已设置的玩家传送的坐标"
+  Success: "$prefix&c删除坐标$warpname成功！"
+  Failed: "$prefix&c删除坐标失败，未知原因"
+
+PlayerInfo:
+  Usage: "$prefix&7/player name/uuid <name>/<uuid>"
+  Usage_Explanation: "查询玩家信息"
+  Failed: "&c信息 &b$info &c查询失败，可能的原因是玩家未注册"
+  NameMessageGui: |-
+    &b玩家:$playername 查询到的信息如下：
+    &f
+    &c真实名字:&a$realname
+    &cUUID:&a$uuid
+    &c最近登录过的IP:&a$ip
+  UUIDMessageGui: |-
+    &bUUID:$uuid 查询到的信息如下：
+    &f
+    &c真实名字:&a$realname
+    &cUUID:&a$uuid
+    &c最近登录过的IP:&a$ip
+
+SecurityAlert:
+  Enable: true
+  ByPassPermission: "SecurityAlert.ByPass"
+  #一个账号允许的IP数
+  AllowIPs: 5
+  #一个IP允许的账号数
+  AllowAccounts: 5
+  #玩家IP变量$ip
+  #玩家name变量$name
+  #玩家uuid变量$uuid
+  #所有玩家信息均从DataBase中已记录的库中获取
+  Commands:
+    - 'ipban $name 您的账号在此服务器具有安全警报，请对其进行保护并尝试联系申诉。'
+
+PlayerJoin:
+  #是否在玩家进入服务器时显示title?(支持papi变量)
+  Title:
+    Enable: true
+    #留空表示按照优先级进行，若没有该title，将不会进行任何操作，请注意大小写
+    Title: "index"
+
+Titles:
+  DEFAULT:
+    #title顺序(将按照从小到大依次检测 比如 1-50 优先检测 1 符合则显示 不符合 检测 2 ...)
+    index: 50
+    #留空或删除表示不检测权限
+    permission: ""
+    MainTitle: "&3欢迎来到"
+    SubTitle: "&3我的服务器"
+    #淡化出现时间(毫秒)
+    FadeIn: 100
+    #停留时间(毫秒)
+    Stay: 100
+    #淡化消失时间(毫秒)
+    FadeOut: 100

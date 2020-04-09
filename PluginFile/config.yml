@@ -1,0 +1,72 @@
+#________                     ___________                            __  .__       .__
+# /  _____/______   ______  _  _\_   _____/ ______ ______ ____   _____/  |_|__|____  |  |   ______
+#/   \  __\_  __ \_/ __ \ \/ \/ /|    __)_ /  ___//  ___// __ \ /    \   __\  \__  \ |  |  /  ___/
+#\    \_\  \  | \/\  ___/\     / |        \\___ \ \___ \\  ___/|   |  \  | |  |/ __ \|  |__\___ \ v
+# \______  /__|    \___  >\/\_/ /_______  /____  >____  >\___  >___|  /__| |__(____  /____/____  >
+#        \/            \/               \/     \/     \/     \/     \/             \/          \/
+
+#配置文件版本 （不要修改）
+version: 1.0.0
+#配置文件版本 （不要修改）
+
+#该部分为数据库连接信息
+Database:
+  #可选的数据库格式：MySQL,SQLITE
+  type: SQLITE
+  hostname: localhost
+  port: 3306
+  #这里是不论在哪个模式显示的database的名字，如minecraft.db
+  database: minecraft
+  username: root
+  password: 123456
+
+#是否启用log日志
+log: true
+
+#是否在每次重载配置文件时都备份一次配置文件
+AutoBackUp: true
+
+#本插件所有权限
+Permissions:
+  All: "GrewEssentials.*"
+  Reload: "GrewEssentials.reload"
+  Version: "GrewEssentials.version"
+  Help: "GrewEssentials.help"
+  Gamemode:
+    #拥有Gamemode所有权限
+    All: "GrewEssentials.Gamemode.*"
+    #拥有切换生存模式的权限
+    SURVIVAL: "GrewEssentials.Gamemode.SURVIVAL"
+    #拥有切换创造模式的权限
+    CREATIVE: "GrewEssentials.Gamemode.CREATIVE"
+    #拥有切换冒险模式的权限
+    ADVENTURE: "GrewEssentials.Gamemode.ADVENTURE"
+    #拥有切换观察者模式的权限
+    SPECTATOR: "GrewEssentials.Gamemode.SPECTATOR"
+  InvSee: "GrewEssentials.InvSee"
+  Sucide: "GrewEssentials.Sucide"
+  Light:
+    Alone: "GrewEssentials.Light"
+    All: "GrewEssentials.Lightall"
+  Announcement: "GrewEssentials.Announcement"
+  BroadCast: "GrewEssentials.BroadCast"
+  KickAll: "GrewEssentials.KickAll"
+  Fly:
+    Self: "GrewEssentials.Fly"
+    Other: "GrewEssentials.Fly.Other"
+  BossBar:
+    Toogle: "GrewEssentials.Bossbar.toogle"
+  Hat: "GrewEssentials.Hat"
+  CDK:
+    Use: "GrewEssentials.CDK.Use"
+    Admin: "GrewEssentials.CDK.ADMIN"
+  ServerManager: "GrewEssentials.ServerManager"
+  Vanish:
+    See: "GrewEssentials.Vanish.See"
+    Self: "GrewEssentials.Vanish.Self"
+    Other: "GrewEssentials.Vanish.Other"
+    Effect: "GrewEssentials.Vanish.Effect"
+  Warp:
+    Use: "GrewEssentials.Warp.Use"
+    Admin: "GrewEssentials.Warp.Admin"
+  PlayerInfo: "GrewEssentials.PlayerInfo"

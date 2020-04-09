@@ -1,0 +1,29 @@
+#________                     ___________                            __  .__       .__
+# /  _____/______   ______  _  _\_   _____/ ______ ______ ____   _____/  |_|__|____  |  |   ______
+#/   \  __\_  __ \_/ __ \ \/ \/ /|    __)_ /  ___//  ___// __ \ /    \   __\  \__  \ |  |  /  ___/
+#\    \_\  \  | \/\  ___/\     / |        \\___ \ \___ \\  ___/|   |  \  | |  |/ __ \|  |__\___ \ v
+# \______  /__|    \___  >\/\_/ /_______  /____  >____  >\___  >___|  /__| |__(____  /____/____  >
+#        \/            \/               \/     \/     \/     \/     \/             \/          \/
+
+#配置文件版本 （不要修改）
+version: 1.0.0
+#配置文件版本 （不要修改）
+
+Console: "控制台"
+Announcement: "玩家: $player 已经完成并使用了Announcement功能。 UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
+BroadCast: "玩家: $player 已经完成并使用了BroadCast功能。 UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
+InvSee: "玩家: $player 已经完成并使用了InvSee功能查看玩家: $lookplayer 的背包。玩家: $player UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
+Light: "玩家: $player 已经完成并使用了Light功能攻击了玩家: $fightplayer。 UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
+#不包括自己变量 $size1
+Lighta: "玩家: $player 已经完成并使用了Lighta功能。 UUID: $playeruuid IP: $playerip 是否为OP: $playerisop 攻击总人数(包括自己): $size"
+Sucide: "玩家: $player 结束了他自己的生命。 UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
+Gamemode: "已设置玩家: $player 的游戏模式为 $type 。由 $doplayer 操作执行。"
+Reload: "玩家: $player 重载了本插件的配置！"
+Version: "玩家: $player 查看了本插件的版本！"
+#包括自己变量 $size
+KickAll: "玩家: $player 已经完成并使用了KickAll功能。 UUID: $playeruuid IP: $playerip 是否为OP: $playerisop 攻击总人数(包括自己): $size1"
+EnableFly: "玩家: $player 已经完成并使用了Fly功能让玩家: $flyplayer 处于飞行状态，UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
+DisbleFly: "玩家: $player 已经完成并使用了Fly功能让玩家: $flyplayer 关闭飞行状态，UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
+EnableVanish: "玩家: $player 使用了Vanish功能使自己处于隐身状态，UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
+DisableVanish: "玩家: $player 已经完成并使用了Vanish功能让玩家: $vanishedplayer关闭于隐身状态，UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
+Hat: "玩家: $player 已经完成并使用了Hat功能，UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
