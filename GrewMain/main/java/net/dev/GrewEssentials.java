@@ -66,7 +66,7 @@ public class GrewEssentials extends JavaPlugin {
             ScriptableObject.defineClass(scope, PluginUtil.class);
             util=(PluginUtil) context.newObject(scope,"PluginUtil");
             scope.put("PluginUtil",scope,util);
-            loadJsFiles(context,scope,new File(this.getDataFolder().toString()+File.separator+"JavaScriptMain"));
+            loadJsFiles(context,scope,new File(this.getDataFolder().toString()+File.separator+"JavaScript"));
         }catch(Throwable e){throw new RuntimeException(e);}
     }
     public <T> T tryInvokeFunction(String name,Object... args)
