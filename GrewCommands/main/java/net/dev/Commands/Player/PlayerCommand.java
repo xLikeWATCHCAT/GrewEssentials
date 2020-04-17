@@ -1,14 +1,11 @@
 package net.dev.Commands.Player;
 
-import net.dev.*;
-import net.dev.Commands.Player.SubCommand.*;
 import net.dev.Commands.Player.SubCommand.UUID;
-import net.dev.Commands.Server.SubCommand.*;
+import net.dev.Commands.Player.SubCommand.*;
+import net.dev.*;
 import net.dev.Utils.CommandUtils.*;
 import net.dev.Utils.StringUtils.*;
-import org.bukkit.*;
 import org.bukkit.command.*;
-import org.bukkit.plugin.*;
 
 import java.util.*;
 

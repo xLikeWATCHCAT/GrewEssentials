@@ -197,6 +197,8 @@ Fly:
   Gamemode_Spectator: "$prefix&c玩家&e$playername&c的模式为观察者，无法将其飞行状态关闭！"
 
 Hat:
+  Usage: "$prefix&7/hat"
+  Usage_Explanation: "使自己的手中物品穿到头部"
   Enable: true
   None: "$prefix&c您放在头上的物品的数量必须为1或不为空气"
   Success: "$prefix&c您已成功将您手上的物品放置在您的头上"
@@ -204,6 +206,24 @@ Hat:
 ServerManager:
   Usage: "$prefix&7/server timings/info"
   Usage_Explanation: "检测服务器报告"
+
+  Info:
+    GenerationTime: "生成时间:"
+    PluginVersion: "插件版本:"
+    ServerInfo: "服务器信息"
+    JavaInfo: "Java:"
+    OperatingSystem: "操作系统:"
+    NumberOfProcessors: "处理器数量:"
+    FreeMemory: "空闲内存:"
+    MaximumMemory: "最大内存:"
+    TotalMemory: "总内存:"
+    Server: "服务器:"
+    ServerName: "服务器名:"
+    ServerVersion: "服务器版本:"
+    OnlinePlayers: "在线玩家:"
+    PluginList: "插件列表"
+    Error: "在收集报告信息时发生异常错误"
+    End: ">> 报告结束"
 
   Timings:
     Start: "$prefix&c开始记录服务器性能，过段时间后输入/server timings paste"
@@ -285,7 +305,14 @@ PlayerJoin:
   Title:
     Enable: true
     #留空表示按照优先级进行，若没有该title，将不会进行任何操作，请注意大小写
-    Title: "index"
+    Title: "DEFAULT"
+
+ChangeSign:
+  Usage: "$prefix&7/ChangeSign <line> <text>"
+  Usage_Explanation: "更改牌子内容"
+  Enable: true
+  UnKnowLine: "&c未知的行数 $line"
+  NotASign: "&c指向的必须是一个牌子"
 
 Titles:
   DEFAULT:

@@ -4,12 +4,10 @@ import me.lucko.luckperms.common.bulkupdate.comparison.*;
 import me.lucko.luckperms.common.model.*;
 import me.lucko.luckperms.common.node.types.*;
 import me.lucko.luckperms.common.plugin.*;
-
 import net.luckperms.api.*;
 import net.luckperms.api.node.Node;
 import net.luckperms.api.node.*;
 import net.luckperms.api.query.*;
-
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.permissions.*;

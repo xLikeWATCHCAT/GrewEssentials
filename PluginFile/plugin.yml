@@ -1,6 +1,6 @@
 name: GrewEssentials
 main: net.dev.GrewEssentials
 author: merganser
-version: 1.0.1
+version: 1.0.2
 depend: [PlaceholderAPI]
 softdepend: [LuckPerms,Vault]

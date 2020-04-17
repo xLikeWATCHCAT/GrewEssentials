@@ -20,12 +20,14 @@ public class PlayerQuitListener implements Listener {
         UUID u = p.getUniqueId();
         if(isVanished(u))
             event.setQuitMessage("");
-        BossBar.getIndexesAtomicByPlayer(p,i->{
-            for(AtomicInteger i2 : i)
-            {
-                BossBar.removeBossbar(i2);
-            }
-        });
+        new Thread(()->{
+            BossBar.getIndexesAtomicByPlayer(p,i->{
+                for(AtomicInteger i2 : i)
+                {
+                    BossBar.removeBossbar(i2);
+                }
+            });
+        }).start();
     }
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {

@@ -17,23 +17,27 @@ public class PlayerMoveListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent event)
     {
         Player p = event.getPlayer();
-        BossBar.getIndexesAtomicByPlayer(p,i->{
-            for(AtomicInteger a : i)
-            {
-                Bukkit.getScheduler().runTask(GrewEssentials.getInstance(),()->BossBar.updateBossbar(a));
-            }
-        });
+        try{
+            BossBar.getIndexesAtomicByPlayer(p,i->{
+                for(AtomicInteger a : i)
+                {
+                    Bukkit.getScheduler().runTask(GrewEssentials.getInstance(),()->BossBar.updateBossbar(a));
+                }
+            });
+        }catch (Throwable e){ }
     }
     @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled = false)
     public void onPlayerTeleport(PlayerTeleportEvent event)
     {
         Player p = event.getPlayer();
-        BossBar.getIndexesAtomicByPlayer(p,i->{
-            for(AtomicInteger a : i)
-            {
-                Bukkit.getScheduler().runTask(GrewEssentials.getInstance(),()->BossBar.updateBossbar(a));
-            }
-        });
+        try{
+            BossBar.getIndexesAtomicByPlayer(p,i->{
+                for(AtomicInteger a : i)
+                {
+                    Bukkit.getScheduler().runTask(GrewEssentials.getInstance(),()->BossBar.updateBossbar(a));
+                }
+            });
+        }catch (Throwable e){ }
     }
     @EventHandler(priority=EventPriority.HIGHEST,ignoreCancelled = false)
     public void onPlayerWorldChange(PlayerChangedWorldEvent event)

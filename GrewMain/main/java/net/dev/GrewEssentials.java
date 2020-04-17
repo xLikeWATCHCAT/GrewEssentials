@@ -12,10 +12,11 @@ import net.dev.File.Yaml.*;
 import net.dev.File.struct.*;
 import net.dev.JavaScript.*;
 import net.dev.Listeners.*;
-import net.dev.Utils.*;
 import net.dev.Utils.StringUtils.*;
+import net.dev.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
+import org.bukkit.plugin.*;
 import org.bukkit.plugin.java.*;
 import org.mozilla.javascript.*;
 
@@ -49,6 +50,11 @@ public class GrewEssentials extends JavaPlugin {
     {
         init();
     }
+
+    public static Plugin getPlugin() {
+        return instance;
+    }
+
     public void init()
     {
         instance=this;
@@ -60,7 +66,7 @@ public class GrewEssentials extends JavaPlugin {
             ScriptableObject.defineClass(scope, PluginUtil.class);
             util=(PluginUtil) context.newObject(scope,"PluginUtil");
             scope.put("PluginUtil",scope,util);
-            loadJsFiles(context,scope,new File(this.getDataFolder().toString()+File.separator+"JavaScript"));
+            loadJsFiles(context,scope,new File(this.getDataFolder().toString()+File.separator+"JavaScriptMain"));
         }catch(Throwable e){throw new RuntimeException(e);}
     }
     public <T> T tryInvokeFunction(String name,Object... args)
@@ -134,32 +140,37 @@ public class GrewEssentials extends JavaPlugin {
     }
 
     private void regListeners(){
-        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), this);
-        Bukkit.getPluginManager().registerEvents(new InventoryListener(),this);
+        try{
+            Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+            Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), this);
+            Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), this);
+            Bukkit.getPluginManager().registerEvents(new InventoryListener(),this);
+        }catch (Throwable e){}
     }
 
     private void regCmds() {
-        regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("gamemode",new GamemodeCommand(),this),"gm"), StringUtils.translateColorCodes(getInstance().Message.getString("Gamemode.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Gamemode.Usage_Explanation").replace("$prefix",""))),this));
-        regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("grewessentials",new GrewEssentialsCommand(),this),"ge","g","ghelp","grewessentialshelp"), StringUtils.translateColorCodes(getInstance().Message.getString("Help.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Help.Usage_Explanation").replace("$prefix",""))),this));
-        regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("grewreload",new ReloadCommand(),this),"greload"), StringUtils.translateColorCodes(getInstance().Message.getString("Reload.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Reload.Usage_Explanation").replace("$prefix",""))),this));
-        regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("server",new ServerCommand(),this),"服务器","servers","servermanager","sm","服务器管理","服务器性能"), StringUtils.translateColorCodes(getInstance().Message.getString("ServerManager.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("ServerManager.Usage_Explanation").replace("$prefix",""))),this));
-        regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("warp",new WarpCommand(),this),"data","传送"), StringUtils.translateColorCodes(getInstance().Message.getString("Warp.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Warp.Usage_Explanation").replace("$prefix",""))),this));
-        regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("removewarp",new RemoveWarpCommand(),this),"remwarp","deletewarp"), StringUtils.translateColorCodes(getInstance().Message.getString("RemoveWarp.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("RemoveWarp.Usage_Explanation").replace("$prefix",""))),this));
-        regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("player",new PlayerCommand(),this),"p","playerinfo","name","uuid"), StringUtils.translateColorCodes(getInstance().Message.getString("PlayerInfo.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("PlayerInfo.Usage_Explanation").replace("$prefix",""))),this));
+        try{
+            regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("gamemode",new GamemodeCommand(),this),"gm"), StringUtils.translateColorCodes(getInstance().Message.getString("Gamemode.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Gamemode.Usage_Explanation").replace("$prefix",""))),this));
+            regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("grewessentials",new GrewEssentialsCommand(),this),"ge","g","ghelp","grewessentialshelp"), StringUtils.translateColorCodes(getInstance().Message.getString("Help.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Help.Usage_Explanation").replace("$prefix",""))),this));
+            regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("grewreload",new ReloadCommand(),this),"greload"), StringUtils.translateColorCodes(getInstance().Message.getString("Reload.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Reload.Usage_Explanation").replace("$prefix",""))),this));
+            regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("server",new ServerCommand(),this),"服务器","servers","servermanager","sm","服务器管理","服务器性能"), StringUtils.translateColorCodes(getInstance().Message.getString("ServerManager.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("ServerManager.Usage_Explanation").replace("$prefix",""))),this));
+            regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("warp",new WarpCommand(),this),"data","传送"), StringUtils.translateColorCodes(getInstance().Message.getString("Warp.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Warp.Usage_Explanation").replace("$prefix",""))),this));
+            regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("removewarp",new RemoveWarpCommand(),this),"remwarp","deletewarp"), StringUtils.translateColorCodes(getInstance().Message.getString("RemoveWarp.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("RemoveWarp.Usage_Explanation").replace("$prefix",""))),this));
+            regComWithCompleter(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("player",new PlayerCommand(),this),"p","playerinfo","name","uuid"), StringUtils.translateColorCodes(getInstance().Message.getString("PlayerInfo.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("PlayerInfo.Usage_Explanation").replace("$prefix",""))),this));
 
-        regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("setwarp",new SetWarpCommand(),this),"设置坐标"), StringUtils.translateColorCodes(getInstance().Message.getString("SetWarp.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("SetWarp.Usage_Explanation").replace("$prefix",""))),this));
-        regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("light",new LightCommand(),this),"shock"), StringUtils.translateColorCodes(getInstance().Message.getString("Light.Alone.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Light.Alone.Usage_Explanation").replace("$prefix",""))),this));
-        regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("lighta",new LightaCommand(),this),"shocka"), StringUtils.translateColorCodes(getInstance().Message.getString("Light.All.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Light.All.Usage_Explanation").replace("$prefix",""))),this));
-        regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("invsee",new InvSeeCommand(),this),"inv","inventory"), StringUtils.translateColorCodes(getInstance().Message.getString("InvSee.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("InvSee.Usage_Explanation").replace("$prefix",""))),this));
-        regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("sucide",new SucideCommand(),this),"自杀"), StringUtils.translateColorCodes(getInstance().Message.getString("Sucide.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Sucide.Usage_Explanation").replace("$prefix",""))),this));
-        regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("broadcast",new BroadCastCommand(),this),"bc"), StringUtils.translateColorCodes(getInstance().Message.getString("BroadCast.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("BroadCast.Usage_Explanation").replace("$prefix",""))),this));
-        regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("announcement",new AnnouncementCommand(),this),"note"), StringUtils.translateColorCodes(getInstance().Message.getString("Announcement.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Announcement.Usage_Explanation").replace("$prefix",""))),this));
-        regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("KickAll",new KickAllCommand(),this),"kicka"), StringUtils.translateColorCodes(getInstance().Message.getString("KickAll.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("KickAll.Usage_Explanation").replace("$prefix",""))),this));
-        regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("fly",new FlyCommand(),this),"flight","useflight","setflight","usefly","setFly","efly","飞行"),StringUtils.translateColorCodes(getInstance().Message.getString("Fly.Usage")).replace("$prefix","")),StringUtils.translateColorCodes(getInstance().Message.getString("Fly.Usage_Explanation"))),this));
-        regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("hat",new HatCommand(),this),"帽子"),StringUtils.translateColorCodes(getInstance().Message.getString("Fly.Usage")).replace("$prefix","")),StringUtils.translateColorCodes(getInstance().Message.getString("Fly.Usage_Explanation"))),this));
-        regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("vanish",new VanishCommand(),this),"v","隐身"),StringUtils.translateColorCodes(getInstance().Message.getString("Fly.Usage")).replace("$prefix","")),StringUtils.translateColorCodes(getInstance().Message.getString("Fly.Usage_Explanation"))),this));
+            regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("sign",new SignCommand(),this),"changesign"), StringUtils.translateColorCodes(getInstance().Message.getString("ChangeSign.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("ChangeSign.Usage_Explanation").replace("$prefix",""))),this));
+            regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("setwarp",new SetWarpCommand(),this),"设置坐标"), StringUtils.translateColorCodes(getInstance().Message.getString("SetWarp.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("SetWarp.Usage_Explanation").replace("$prefix",""))),this));
+            regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("light",new LightCommand(),this),"shock"), StringUtils.translateColorCodes(getInstance().Message.getString("Light.Alone.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Light.Alone.Usage_Explanation").replace("$prefix",""))),this));
+            regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("lighta",new LightaCommand(),this),"shocka"), StringUtils.translateColorCodes(getInstance().Message.getString("Light.All.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Light.All.Usage_Explanation").replace("$prefix",""))),this));
+            regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("invsee",new InvSeeCommand(),this),"inv","inventory"), StringUtils.translateColorCodes(getInstance().Message.getString("InvSee.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("InvSee.Usage_Explanation").replace("$prefix",""))),this));
+            regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("sucide",new SucideCommand(),this),"自杀"), StringUtils.translateColorCodes(getInstance().Message.getString("Sucide.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Sucide.Usage_Explanation").replace("$prefix",""))),this));
+            regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("broadcast",new BroadCastCommand(),this),"bc"), StringUtils.translateColorCodes(getInstance().Message.getString("BroadCast.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("BroadCast.Usage_Explanation").replace("$prefix",""))),this));
+            regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("announcement",new AnnouncementCommand(),this),"note"), StringUtils.translateColorCodes(getInstance().Message.getString("Announcement.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("Announcement.Usage_Explanation").replace("$prefix",""))),this));
+            regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("KickAll",new KickAllCommand(),this),"kicka"), StringUtils.translateColorCodes(getInstance().Message.getString("KickAll.Usage").replace("$prefix",""))),StringUtils.translateColorCodes(getInstance().Message.getString("KickAll.Usage_Explanation").replace("$prefix",""))),this));
+            regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("fly",new FlyCommand(),this),"flight","useflight","setflight","usefly","setFly","efly","飞行"),StringUtils.translateColorCodes(getInstance().Message.getString("Fly.Usage")).replace("$prefix","")),StringUtils.translateColorCodes(getInstance().Message.getString("Fly.Usage_Explanation"))),this));
+            regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("hat",new HatCommand(),this),"帽子"),StringUtils.translateColorCodes(getInstance().Message.getString("Hat.Usage")).replace("$prefix","")),StringUtils.translateColorCodes(getInstance().Message.getString("Hat.Usage_Explanation"))),this));
+            regCom(this.getName(),setTabCom(setComDesc(setComUsa(setComAlias(newPluginCommand("vanish",new VanishCommand(),this),"v","隐身"),StringUtils.translateColorCodes(getInstance().Message.getString("Vanish.Usage")).replace("$prefix","")),StringUtils.translateColorCodes(getInstance().Message.getString("Vanish.Usage_Explanation"))),this));
+        }catch (Throwable e){}
     }
 
     @Override

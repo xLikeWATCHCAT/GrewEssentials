@@ -70,3 +70,4 @@ Permissions:
     Use: "GrewEssentials.Warp.Use"
     Admin: "GrewEssentials.Warp.Admin"
   PlayerInfo: "GrewEssentials.PlayerInfo"
+  ChangeSign: "GrewEssentials.ChangeSign"

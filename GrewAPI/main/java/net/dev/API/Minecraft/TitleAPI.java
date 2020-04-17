@@ -23,7 +23,7 @@ public class TitleAPI {
         sendTitle(player, fadeIn, stay, fadeOut, title, subtitle);
     }
     public static void sendTitle(Player player, String MainTitle, String SubTitle){
-        sendFullTitle(player,5,66,5,MainTitle,SubTitle);
+        sendFullTitle(player,-1,-1,-1,MainTitle,SubTitle);
     }
 
     @SuppressWarnings("rawtypes")

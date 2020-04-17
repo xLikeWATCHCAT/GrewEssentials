@@ -97,7 +97,7 @@ public class MojangAPI {
 
     /**
      * @param name - Name of the player
-     * @return Dash-less UUID (String)
+     * @return Dash-less UUID (encrypt)
      */
     public String getUUID(String name, boolean tryNext) {
         String output;

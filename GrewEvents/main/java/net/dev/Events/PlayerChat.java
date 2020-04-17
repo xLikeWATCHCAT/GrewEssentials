@@ -1,6 +1,5 @@
 package net.dev.Events;
 
-import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
 
 public class PlayerChat {
