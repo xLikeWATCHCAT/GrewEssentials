@@ -1,7 +1,7 @@
 package net.dev.Utils.DatabaseUtils;
 
-import net.dev.*;
 import net.dev.Database.*;
+import net.dev.*;
 import org.bukkit.configuration.*;
 
 public class LoadDatabase {

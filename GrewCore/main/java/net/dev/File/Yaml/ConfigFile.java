@@ -1,8 +1,7 @@
 package net.dev.File.Yaml;
 
-import java.io.*;
-import java.util.logging.*;
-
+import com.google.common.base.*;
+import com.google.common.io.*;
 import net.dev.*;
 import net.dev.Utils.StringUtils.StringUtils;
 import org.apache.commons.lang.*;
@@ -12,8 +11,9 @@ import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.*;
 import org.yaml.snakeyaml.*;
 import org.yaml.snakeyaml.representer.*;
-import com.google.common.base.*;
-import com.google.common.io.*;
+
+import java.io.*;
+import java.util.logging.*;
 
 public class ConfigFile extends YamlConfiguration {
     private File file;
