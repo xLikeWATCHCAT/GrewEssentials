@@ -54,7 +54,7 @@ public class KickAllCommand implements CommandExecutor {
                     sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("KickAll.All")).replace("$prefix",StringUtils.Prefix));//成功踢出
                     return true;
                 }else {
-                    sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("NoHavePerMission")).replace("$prefix", StringUtils.Prefix));
+                    sender.sendMessage(StringUtils.DoNotHavePerMission);
                     return true;
                 }
             }

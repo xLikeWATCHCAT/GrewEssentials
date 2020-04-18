@@ -2,6 +2,7 @@ package net.dev.API;
 
 import net.dev.Database.*;
 import net.dev.Utils.DatabaseUtils.*;
+import net.dev.Utils.StringUtils.*;
 import org.bukkit.entity.*;
 
 import java.util.*;
@@ -53,5 +54,10 @@ public class PlayerInfo {
     public static String getPlayerIPUUID(String u)
     {
         return LoadDatabase.db.dbSelectFirst("PlayerInfo","ip",new KeyValue(){{ this.add("uuid",u); }});
+    }
+    public static int getPlayerWarnBlackMessageTimes(Player p){
+        UUID u = p.getUniqueId();
+        String times = LoadDatabase.db.dbSelectFirst("BlackMessageWarnTimes","times",new KeyValue(){{ this.add("uuid",u); }});
+        return Integer.valueOf(times);
     }
 }

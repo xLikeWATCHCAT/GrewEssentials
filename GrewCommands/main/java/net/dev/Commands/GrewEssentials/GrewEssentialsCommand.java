@@ -10,8 +10,8 @@ import org.bukkit.entity.*;
 
 import java.util.*;
 
-import static net.dev.Utils.CommandUtils.CommandUtil.ArgumentUtil.*;
 import static net.dev.Utils.LogUtils.LogUtils.*;
+import static net.dev.Utils.StringUtils.ArgumentUtil.*;
 import static net.dev.Utils.StringUtils.StringUtils.*;
 import static net.dev.Utils.StringUtils.TabListType.*;
 

@@ -18,17 +18,15 @@ public class HatCommand implements CommandExecutor {
                     PlayerInventory inv = p.getInventory();
                     ItemStack held = p.getItemInHand();
                     ItemStack helm = inv.getHelmet();
-                    if (held.getType() != Material.AIR) {
-                        sender.sendMessage(StringUtils.translateColorCodes(p, GrewEssentials.getInstance().Message.getString("Hat.None").replace("$prefix",StringUtils.Prefix)));
-                    } else {
                         try{
                             inv.setHelmet(held);
                             p.setItemInHand(helm);
                             p.updateInventory();
                             sender.sendMessage(StringUtils.translateColorCodes(p,GrewEssentials.getInstance().Message.getString("Hat.Success").replace("$prefix",StringUtils.Prefix)));
                             LogUtils.writeLog(GrewEssentials.getInstance().log.getString("Hat").replace("$player",p.getName()).replace("$playeruuid",p.getUniqueId().toString()).replace("$playerip",p.getAddress().getHostName()).replace("$playerisop",String.valueOf(p.isOp())));
-                        }catch (Throwable e){}
-                      }
+                        }catch (Throwable e){
+                            sender.sendMessage(StringUtils.translateColorCodes(p, GrewEssentials.getInstance().Message.getString("Hat.None").replace("$prefix",StringUtils.Prefix)));
+                        }
                 } else {
                     sender.sendMessage(StringUtils.OnlyPlayer);
                 }
