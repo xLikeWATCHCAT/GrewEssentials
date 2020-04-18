@@ -33,7 +33,7 @@ public class Name implements IChildCommand {
     @Override
     public Vector<String> getArgumentsDescriptions()
     {
-        return VectorUtil.toVector("player");
+        return VectorUtil.toVector("onlineplayer");
     }
     @Override
     public String getPermission() { return GrewEssentials.getInstance().Config.getString("Permissions.PlayerInfo"); }
