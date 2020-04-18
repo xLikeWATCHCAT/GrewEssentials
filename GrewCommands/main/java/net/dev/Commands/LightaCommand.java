@@ -43,7 +43,7 @@ public class LightaCommand implements CommandExecutor {
                     }
                     if(sender instanceof Player)
                         LogUtils.writeLog(StringUtils.removeColorCodes(GrewEssentials.getInstance().log.getString("Lighta").replace("$player",sender.getName()).replace("$playeruuid",((Player) sender).getUniqueId().toString()).replace("$playerip", ((Player) sender).getAddress().getHostName()).replace("$playerisop",String.valueOf(sender.isOp())).replace("$size",String.valueOf(Bukkit.getOnlinePlayers().size())).replace("$size",String.valueOf(Bukkit.getOnlinePlayers().size()-1))));
-                    sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Light.All.Message")).replace("$Prefix", StringUtils.Prefix));
+                    sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Light.All.Message")).replace("$Pprefix", StringUtils.Prefix));
                     return true;
                 }else{
                     sender.sendMessage(StringUtils.DoNotHavePerMission);

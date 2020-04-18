@@ -33,8 +33,6 @@ public class VanishCommand implements CommandExecutor {
                 }
                 if (p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.Vanish.Effect"))|| p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.All"))) {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false));
-                }else {
-                    p.sendMessage(StringUtils.DoNotHavePerMission);
                 }
                 Object pack=newInstance(getConstructor(getNMSClass("PacketPlayOutPlayerInfo"),action, ps.getClass()),Enum.valueOf((Class)action,"REMOVE_PLAYER"),ps);
                 sendPacketToAllPlayers(pack);
@@ -70,8 +68,6 @@ public class VanishCommand implements CommandExecutor {
             }
             if (p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.Vanish.Effect"))|| p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.All"))) {
                 p.removePotionEffect(PotionEffectType.INVISIBILITY);
-            }else {
-                p.sendMessage(StringUtils.DoNotHavePerMission);
             }
             sendPacketToAllPlayers(newInstance(getConstructor(getNMSClass("PacketPlayOutPlayerInfo"),action, ps.getClass()),Enum.valueOf((Class)action,"ADD_PLAYER"),ps));
             if(isVanished(p.getUniqueId())) {
@@ -110,6 +106,8 @@ public class VanishCommand implements CommandExecutor {
                     sender.sendMessage(StringUtils.OnlyPlayer);
                 }
             }
+        }else{
+            sender.sendMessage(StringUtils.DoNotHavePerMission);
         }
         return true;
     }

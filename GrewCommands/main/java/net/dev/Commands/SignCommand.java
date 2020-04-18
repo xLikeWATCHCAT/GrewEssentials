@@ -52,6 +52,7 @@ public class SignCommand implements CommandExecutor {
 
                                     String var10 = var6.toString().substring(1, var6.length());
                                     sign.setLine(line - 1, var10);
+                                    p.sendMessage(StringUtils.translateColorCodes(p,GrewEssentials.getInstance().Message.getString("")).replace("$prefix",StringUtils.Prefix).replace("$line",args[0]).replace("$content",var10));
                                 }
                                 sign.update();
                                 LogUtils.writeLog(GrewEssentials.getInstance().log.getString("Sign").replace("$player",p.getName()).replace("$playeruuid",p.getUniqueId().toString()).replace("$playerip",p.getAddress().getHostName()).replace("$playerisop",String.valueOf(p.isOp())).replace("$playerlocation",p.getLocation().toString()));

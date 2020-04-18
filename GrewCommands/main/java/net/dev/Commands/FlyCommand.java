@@ -58,8 +58,8 @@ public class FlyCommand implements CommandExecutor{
         String pn,puuid,pip;
         if(s instanceof Player){
             pn = GrewEssentials.getInstance().log.getString("Console");
-            puuid = "无";
-            pip = "无";
+            puuid = "None";
+            pip = "None";
         } else{
             pn = s.getName();
             puuid = ((Player) s).getUniqueId().toString();
