@@ -46,7 +46,7 @@ public class SpeedCommand implements CommandWithCompleter {
                         }
                         if(type.equalsIgnoreCase("fly")){
                             if(args.length != 2){
-                                p.setFlySpeed(0.3f);
+                                p.setFlySpeed(0.25f);
                                 sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Speed.ColseSpeed")).replace("$prefix",StringUtils.Prefix).replace("$type",type));
                                 LogUtils.writeLog(GrewEssentials.getInstance().log.getString("Speed").replace("$player", sender.getName()).replace("$useplayer",p.getName()).replace("$playeruuid",((Player) sender).getUniqueId().toString()).replace("$playerip",((Player) sender).getAddress().getHostName()).replace("$playerisop",String.valueOf(sender.isOp())).replace("$useplayeruuid",p.getUniqueId().toString()).replace("$useplayerip",p.getAddress().getHostName()).replace("$useplayerisop",String.valueOf(p.isOp())).replace("$speed",String.valueOf(1)));
                                 return true;
@@ -56,7 +56,7 @@ public class SpeedCommand implements CommandWithCompleter {
                             LogUtils.writeLog(GrewEssentials.getInstance().log.getString("Speed").replace("$player", sender.getName()).replace("$useplayer",p.getName()).replace("$playeruuid",((Player) sender).getUniqueId().toString()).replace("$playerip",((Player) sender).getAddress().getHostName()).replace("$playerisop",String.valueOf(sender.isOp())).replace("$useplayeruuid",p.getUniqueId().toString()).replace("$useplayerip",p.getAddress().getHostName()).replace("$useplayerisop",String.valueOf(p.isOp())).replace("$speed",String.valueOf(speed)));
                         }else if(type.equalsIgnoreCase("walk")){
                             if(args.length != 2){
-                                p.setWalkSpeed(0.3f);
+                                p.setWalkSpeed(0.25f);
                                 sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Speed.ColseSpeed")).replace("$prefix",StringUtils.Prefix).replace("$type",type));
                                 LogUtils.writeLog(GrewEssentials.getInstance().log.getString("Speed").replace("$player", sender.getName()).replace("$useplayer",p.getName()).replace("$playeruuid",((Player) sender).getUniqueId().toString()).replace("$playerip",((Player) sender).getAddress().getHostName()).replace("$playerisop",String.valueOf(sender.isOp())).replace("$useplayeruuid",p.getUniqueId().toString()).replace("$useplayerip",p.getAddress().getHostName()).replace("$useplayerisop",String.valueOf(p.isOp())).replace("$speed",String.valueOf(1)));
                                 return true;
