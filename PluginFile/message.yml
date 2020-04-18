@@ -314,6 +314,36 @@ ChangeSign:
   UnKnowLine: "&c未知的行数 $line"
   NotASign: "&c指向的必须是一个牌子"
 
+Speed:
+  Usage: "$prefix&7/Speed <fly/walk> <speed> <player>"
+  Usage_Explanation: "更改玩家飞行或行走的速度"
+  Enable: true
+  UnKnowType: "&c未知的模式 $type"
+  ColseSpeed: "&b已成功关闭 $type 模式的加速效果！"
+  SpeedInputError: "&c速度必须为数字！"
+  Success: "&b已设置$player $type 的速度为 $speed"
+
+TelePort:
+  Enable: true
+  TPALL:
+    Usage: "$prefix&7/TPALL <player>"
+    Usage_Explanation: "使全体在线玩家传送到指定的玩家的位置"
+    Enable: true
+    Success: "&c你已成功将&a$players&c名玩家传送到&b$player&c的身边"
+  TPHERE:
+    Usage: "$prefix&7/TPHere <teleportplayer> <player>"
+    Usage_Explanation: "使指定的在线玩家传送到指定的玩家的位置"
+    Enable: true
+    Success: "&c你已成功将&b$teleportplayer&c传送到$player的身边"
+
+BlackMessage:
+  Enable: true
+  Warn: "&c请不要使用服务器违规言论，请及时查看服务器相关的规则！"
+  WarnMinTimes: 10
+  WarnMaxTimes: 20
+  Commands:
+    - "mute $player 30s 言语过激。"
+
 Titles:
   DEFAULT:
     #title顺序(将按照从小到大依次检测 比如 1-50 优先检测 1 符合则显示 不符合 检测 2 ...)

@@ -27,3 +27,5 @@ DisbleFly: "玩家: $player 已经完成并使用了Fly功能让玩家: $flyplay
 EnableVanish: "玩家: $player 使用了Vanish功能使自己处于隐身状态，UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
 DisableVanish: "玩家: $player 已经完成并使用了Vanish功能让玩家: $vanishedplayer关闭于隐身状态，UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
 Hat: "玩家: $player 已经完成并使用了Hat功能，UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
+Sign: "玩家: $player 已经完成并使用了Sign功能，位置: $playerlocation UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
+Speed: "玩家: $player 为 $useplayer 已经完成并使用了Speed功能，UUID: $playeruuid IP: $playerip 是否为OP: $playerisop"
