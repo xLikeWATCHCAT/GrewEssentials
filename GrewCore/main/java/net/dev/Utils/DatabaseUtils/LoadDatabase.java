@@ -25,9 +25,9 @@ public class LoadDatabase {
             this.add("name","LONGTEXT");
             this.add("ip","LONGTEXT");
         }},null);
-        db.createTables("Economic",new KeyValue(){{
+        db.createTables("BlackMessageWarnTimes",new KeyValue(){{
             this.add("uuid","LONGTEXT");
-            this.add("value","LONGTEXT");
+            this.add("times","LONGTEXT");
         }},null);
     }
 }

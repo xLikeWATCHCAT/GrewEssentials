@@ -45,6 +45,12 @@ public class TabListType {
         ret.add("data");
         return ret;
     }
+    public static Vector<String> getSpeedType(){
+        Vector<String> ret=new Vector<>();
+        ret.add("fly");
+        ret.add("walk");
+        return ret;
+    }
     public static ArrayList<String> getPlugins()
     {
         ArrayList<String> list = new ArrayList<>();
