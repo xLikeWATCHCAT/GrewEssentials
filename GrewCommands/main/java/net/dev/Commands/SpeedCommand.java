@@ -22,7 +22,7 @@ public class SpeedCommand implements CommandWithCompleter {
                     if(args.length>=1){
                         String type = args[0];
                         Player p;
-                        Float speed = 1f;
+                        Float speed = 0.25f;
                         if(args.length == 3){
                             try{
                                 if(Bukkit.getPlayer(args[2])==null){
