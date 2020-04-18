@@ -9,6 +9,7 @@ import org.bukkit.configuration.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
 import org.bukkit.event.player.*;
+import org.bukkit.potion.*;
 
 import java.util.*;
 import java.util.concurrent.atomic.*;
@@ -52,9 +53,15 @@ public class PlayerJoinListener implements Listener {
         Player p = event.getPlayer();
         UUID u = p.getUniqueId();
         try{
-            if(isVanished(u)){
-                event.setJoinMessage("§f");
-                vanishedset(event);
+            if(GrewEssentials.getInstance().Message.getBoolean("Vanish.Enable")){
+                if(isVanished(u)){
+                    event.setJoinMessage("§f");
+                    new Thread(()->{
+                        vanishedset(event);
+                    }).start();
+                }
+            }else{
+                p.removePotionEffect(PotionEffectType.INVISIBILITY);
             }
             new Thread(()->{
                 String name= LoadDatabase.db.dbSelectFirst("PlayerInfo","name",new KeyValue(){{ this.add("uuid",u.toString()); }});

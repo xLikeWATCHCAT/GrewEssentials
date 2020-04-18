@@ -62,9 +62,13 @@ Permissions:
     Admin: "GrewEssentials.CDK.ADMIN"
   ServerManager: "GrewEssentials.ServerManager"
   Vanish:
+    #能否看见玩家隐身
     See: "GrewEssentials.Vanish.See"
+    #是否能够隐身自己的权限
     Self: "GrewEssentials.Vanish.Self"
+    #是否能给别人隐身的权限
     Other: "GrewEssentials.Vanish.Other"
+    #隐身时附带隐身二的效果
     Effect: "GrewEssentials.Vanish.Effect"
   Warp:
     Use: "GrewEssentials.Warp.Use"

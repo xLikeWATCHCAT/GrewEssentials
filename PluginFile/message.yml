@@ -311,8 +311,9 @@ ChangeSign:
   Usage: "$prefix&7/ChangeSign <line> <text>"
   Usage_Explanation: "更改牌子内容"
   Enable: true
-  UnKnowLine: "&c未知的行数 $line"
-  NotASign: "&c指向的必须是一个牌子"
+  UnKnowLine: "$prefix &c未知的行数 $line"
+  NotASign: "$prefix &c指向的必须是一个牌子"
+  Success: "$prefix &a你已成功将目标牌子的第&b$line&a改为&b$content"
 
 Speed:
   Usage: "$prefix&7/Speed <fly/walk> <speed> <player>"
@@ -329,16 +330,16 @@ TelePort:
     Usage: "$prefix&7/TPALL <player>"
     Usage_Explanation: "使全体在线玩家传送到指定的玩家的位置"
     Enable: true
-    Success: "&c你已成功将&a$players&c名玩家传送到&b$player&c的身边"
+    Success: "$prefix &c你已成功将&a$players&c名玩家传送到&b$player&c的身边"
   TPHERE:
     Usage: "$prefix&7/TPHere <teleportplayer> <player>"
     Usage_Explanation: "使指定的在线玩家传送到指定的玩家的位置"
     Enable: true
-    Success: "&c你已成功将&b$teleportplayer&c传送到$player的身边"
+    Success: "$prefix &c你已成功将&b$teleportplayer&c传送到$player的身边"
 
 BlackMessage:
   Enable: true
-  Warn: "&c请不要使用服务器违规言论，请及时查看服务器相关的规则！"
+  Warn: "&c请不要使用服务器违规言论，请及时查看服务器相关的规则，如果多次您可能会被禁言！"
   WarnMinTimes: 10
   WarnMaxTimes: 20
   Commands:

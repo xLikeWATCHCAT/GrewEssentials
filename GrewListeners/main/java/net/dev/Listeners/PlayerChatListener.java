@@ -26,6 +26,7 @@ public class PlayerChatListener implements Listener {
                     String BlackMessage = message.toLowerCase();
                     if(ChatMessage.contains(BlackMessage)){
                         PlayerChat.stopPlayerChat(event);
+                        p.sendMessage(StringUtils.translateColorCodes(event.getPlayer(),GrewEssentials.getInstance().Message.getString("BlackMessage.Warn")).replace("$prefix",StringUtils.Prefix));
                         new Thread(()->{
                             String times = LoadDatabase.db.dbSelectFirst("BlackMessageWarnTimes","times",new KeyValue(){{ this.add("uuid",u); }});
                             int warntimes = PlayerInfo.getPlayerWarnBlackMessageTimes(p);
@@ -33,7 +34,6 @@ public class PlayerChatListener implements Listener {
                             if(times == null){
                                 LoadDatabase.db.dbInsert("BlackMessageWarnTimes",new KeyValue(){{
                                     this.add("uuid",u.toString());
-                                    //侧搭
                                     this.add("times",0);
                                 }});
                             }else{
@@ -43,11 +43,11 @@ public class PlayerChatListener implements Listener {
                             if(warntimes >= randomtimes){
                                 for(String cmd:GrewEssentials.getInstance().Message.getStringList("BlackMessage.Commands"))
                                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
-                                LoadDatabase.db.dbUpdate("BlackMessageWarnTimes",new KeyValue("times",1), new KeyValue("uuid",u.toString()));
+                                LoadDatabase.db.dbUpdate("BlackMessageWarnTimes",new KeyValue("times",0), new KeyValue("uuid",u.toString()));
                             }
                         }).start();
-                        p.sendMessage(StringUtils.translateColorCodes(event.getPlayer(),GrewEssentials.getInstance().Message.getString("BlackMessage.Warn")).replace("$prefix",StringUtils.Prefix));
-                    }
+                        return;
+                      }
                 }
             }
         }catch (Throwable e){ }

@@ -58,6 +58,8 @@ public class PlayerInfo {
     public static int getPlayerWarnBlackMessageTimes(Player p){
         UUID u = p.getUniqueId();
         String times = LoadDatabase.db.dbSelectFirst("BlackMessageWarnTimes","times",new KeyValue(){{ this.add("uuid",u); }});
+        if(times == null)
+            times = "0";
         return Integer.valueOf(times);
     }
 }
