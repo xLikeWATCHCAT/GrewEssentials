@@ -80,8 +80,9 @@ public class FlyCommand implements CommandExecutor{
                         this.add("vanish", finalVanish);
                     }});
                 }
-                else
+                else{
                     LoadDatabase.db.dbUpdate("CommandsEnable",new KeyValue(){{ this.add("fly","0"); }},new KeyValue(){{ this.add("uuid",t.getUniqueId().toString()); }});
+                }
                 t.setFlying(false);
                 s.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Fly.Disable_Message")).replace("$playername",t.getName()).replace("$prefix", StringUtils.Prefix));
                 LogUtils.writeLog(GrewEssentials.getInstance().log.getString("DisbleFly").replace("$player",pn).replace("$flyplayer",t.getName()).replace("$playeruuid",puuid).replace("$playerip",pip).replace("$playerisop",String.valueOf(s.isOp())).replace("$flyplayeruuid",t.getUniqueId().toString()).replace("$flyplayerip",t.getAddress().getHostName()).replace("$flyplayerisop",String.valueOf(t.isOp())));
@@ -96,12 +97,13 @@ public class FlyCommand implements CommandExecutor{
                     this.add("vanish", finalVanish1);
                 }});
             }
-            else
+            else{
                 LoadDatabase.db.dbUpdate("CommandsEnable",new KeyValue(){{
                     this.add("fly","1");
                 }},new KeyValue(){{
                     this.add("uuid",t.getUniqueId().toString());
                 }});
+            }
             s.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Fly.Enable_Message")).replace("$playername",t.getName()).replace("$prefix", StringUtils.Prefix));
             LogUtils.writeLog(GrewEssentials.getInstance().log.getString("EnableFly").replace("$player",pn).replace("$flyplayer",t.getName()).replace("$playeruuid",puuid).replace("$playerip",pip).replace("$playerisop",String.valueOf(s.isOp())).replace("$flyplayeruuid",t.getUniqueId().toString()).replace("$flyplayerip",t.getAddress().getHostName()).replace("$flyplayerisop",String.valueOf(t.isOp())));
         }

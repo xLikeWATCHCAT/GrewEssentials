@@ -34,22 +34,28 @@ public class VanishCommand implements CommandExecutor {
                 if (p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.Vanish.Effect"))|| p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.All"))) {
                     p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false));
                 }
-                Object pack=newInstance(getConstructor(getNMSClass("PacketPlayOutPlayerInfo"),action, ps.getClass()),Enum.valueOf((Class)action,"REMOVE_PLAYER"),ps);
-                sendPacketToAllPlayers(pack);
-                if(!isVanished(p.getUniqueId())) {
-                    p.sendMessage(StringUtils.translateColorCodes(p,GrewEssentials.getInstance().Message.getString("Vanish.Message_Enable")).replace("$playername", p.getName()).replace("$prefix",StringUtils.Prefix));
-                    if(GrewEssentials.getInstance().Message.getBoolean("Vanish.BroadCast"))
-                        Utils.BroadCast(GrewEssentials.getInstance().Message.getString("Vanish.LeftMessage").replace("$playername",p.getName()).replace("$prefix",StringUtils.Prefix));
-                }
-                if(vanish==null){
-                    LoadDatabase.db.dbInsert("CommandsEnable",new KeyValue(){{
-                        this.add("uuid",p.getUniqueId().toString());
-                        this.add("fly",fly);
-                        this.add("vanish", "1");
-                    }});
-                }else{
-                    LoadDatabase.db.dbUpdate("CommandsEnable",new KeyValue(){{ this.add("vanish","1"); }},new KeyValue(){{ this.add("uuid",p.getUniqueId().toString()); }});
-                }
+                new Thread(()->{
+                    Object pack=newInstance(getConstructor(getNMSClass("PacketPlayOutPlayerInfo"),action, ps.getClass()),Enum.valueOf((Class)action,"REMOVE_PLAYER"),ps);
+                    sendPacketToAllPlayers(pack);
+                }).start();
+                new Thread(()->{
+                    if(!isVanished(p.getUniqueId())) {
+                        p.sendMessage(StringUtils.translateColorCodes(p,GrewEssentials.getInstance().Message.getString("Vanish.Message_Enable")).replace("$playername", p.getName()).replace("$prefix",StringUtils.Prefix));
+                        if(GrewEssentials.getInstance().Message.getBoolean("Vanish.BroadCast"))
+                            Utils.BroadCast(GrewEssentials.getInstance().Message.getString("Vanish.LeftMessage").replace("$playername",p.getName()).replace("$prefix",StringUtils.Prefix));
+                    }
+                }).start();
+                new Thread(()->{
+                    if(vanish==null){
+                        LoadDatabase.db.dbInsert("CommandsEnable",new KeyValue(){{
+                            this.add("uuid",p.getUniqueId().toString());
+                            this.add("fly",fly);
+                            this.add("vanish", "1");
+                        }});
+                    }else{
+                        LoadDatabase.db.dbUpdate("CommandsEnable",new KeyValue(){{ this.add("vanish","1"); }},new KeyValue(){{ this.add("uuid",p.getUniqueId().toString()); }});
+                    }
+                }).start();
                 if(GrewEssentials.getInstance().Message.getBoolean("Vanish.SendActionBar",true)){
                     new Thread(()-> {
                         while (isVanished(p.getUniqueId())) {
@@ -69,13 +75,19 @@ public class VanishCommand implements CommandExecutor {
             if (p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.Vanish.Effect"))|| p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.All"))) {
                 p.removePotionEffect(PotionEffectType.INVISIBILITY);
             }
-            sendPacketToAllPlayers(newInstance(getConstructor(getNMSClass("PacketPlayOutPlayerInfo"),action, ps.getClass()),Enum.valueOf((Class)action,"ADD_PLAYER"),ps));
-            if(isVanished(p.getUniqueId())) {
-                p.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Vanish.Message_Disable")).replace("$playername", p.getName()).replace("$prefix",StringUtils.Prefix));
-                if(GrewEssentials.getInstance().Message.getBoolean("Vanish.BroadCast"))
-                    Utils.BroadCast(GrewEssentials.getInstance().Message.getString("Vanish.JoinMessage").replace("$playername",p.getName()));
-            }
-            LoadDatabase.db.dbUpdate("CommandsEnable",new KeyValue(){{ this.add("vanish","0"); }},new KeyValue(){{ this.add("uuid",p.getUniqueId().toString()); }});
+            new Thread(()->{
+                sendPacketToAllPlayers(newInstance(getConstructor(getNMSClass("PacketPlayOutPlayerInfo"),action, ps.getClass()),Enum.valueOf((Class)action,"ADD_PLAYER"),ps));
+            }).start();
+            new Thread(()->{
+                if(isVanished(p.getUniqueId())) {
+                    p.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Vanish.Message_Disable")).replace("$playername", p.getName()).replace("$prefix",StringUtils.Prefix));
+                    if(GrewEssentials.getInstance().Message.getBoolean("Vanish.BroadCast"))
+                        Utils.BroadCast(GrewEssentials.getInstance().Message.getString("Vanish.JoinMessage").replace("$playername",p.getName()));
+                }
+            }).start();
+            new Thread(()->{
+                 LoadDatabase.db.dbUpdate("CommandsEnable",new KeyValue(){{ this.add("vanish","0"); }},new KeyValue(){{ this.add("uuid",p.getUniqueId().toString()); }});
+            }).start();
         }
     }
     @Override
