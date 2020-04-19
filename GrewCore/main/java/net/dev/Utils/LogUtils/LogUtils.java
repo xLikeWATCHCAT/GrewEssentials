@@ -10,11 +10,13 @@ public class LogUtils {
     public static FileOutputStream log;
     public static void writeLog(String s)
     {
-        if(GrewEssentials.getInstance().Config.getBoolean("log",true)){
-            try {
-                log.write((new Date().toString()+" : "+ StringUtils.removeColorCodes(s)+"\n").getBytes("UTF8"));
-            }catch(Throwable e){if(e instanceof RuntimeException)  throw (RuntimeException)e; throw new RuntimeException(e);}
-        }
+        new Thread(()->{
+            if(GrewEssentials.getInstance().Config.getBoolean("log",true)){
+                try {
+                    log.write((new Date().toString()+" : "+ StringUtils.removeColorCodes(s)+"\n").getBytes("UTF8"));
+                }catch(Throwable e){if(e instanceof RuntimeException)  throw (RuntimeException)e; throw new RuntimeException(e);}
+            }
+        }).start();
     }
     public static void log(){
         try {
