@@ -38,8 +38,6 @@ public class StringUtils {
     public static String translateColorCodes(Player p,String string){ return translateColorCodes(PlaceholderAPI.setPlaceholders(p,string)); }
     public static String removeColorCodes(String string){ return ChatColor.stripColor(getColoredString(string)); }
     public static String getNanon(){ return String.valueOf(System.nanoTime()); }
-    public static String configStringBuilder(String path) { return StringUtils.translateColorCodes(StringUtils.Prefix+GrewEssentials.getInstance().Message.getString(path)); }
-    public static String getConfig(String path) { return StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString(path)); }
     public static List<String> toLowerCase(List<String> s)
     {
         List<String> ret=new ArrayList<>();

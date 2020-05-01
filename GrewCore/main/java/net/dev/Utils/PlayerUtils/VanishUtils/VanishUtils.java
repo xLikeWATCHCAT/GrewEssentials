@@ -9,19 +9,21 @@ import org.bukkit.event.player.*;
 import java.lang.reflect.*;
 import java.util.*;
 
+import static net.dev.Commands.VanishCommand.*;
 import static net.dev.ReflectionWrapper.*;
 import static net.dev.Utils.Utils.*;
 
 public class VanishUtils {
+    public static Vector<Player> VanishPlayerInThisServerList=new Vector<>();
     public static void vanishedset(PlayerJoinEvent event){
         Player p = event.getPlayer();
         UUID u = p.getUniqueId();
-        Object NMSPlayer=invokeMethod(getMethod(p.getClass(),"getHandle"),p);
+        Object NMSPlayer=invokeMethod(getHandle,p);
         Class<?> action=getInnerClass(getNMSClass("PacketPlayOutPlayerInfo"),"EnumPlayerInfoAction");
         Object ps= Array.newInstance(NMSPlayer.getClass(),1);
         Array.set(ps,0,NMSPlayer);
         if(isVanished(u)) {
-            VanishCommand.setVanished(event.getPlayer(), true);
+            VanishCommand.setVanished(event.getPlayer(), true,false,false);
             new Thread(()->{
                 try {
                     Thread.sleep(10);
@@ -32,7 +34,7 @@ public class VanishUtils {
                 sendPacketToAllPlayers(pack);
             }).start();
            }else{
-            VanishCommand.setVanished(event.getPlayer(), false);
+            VanishCommand.setVanished(event.getPlayer(), false,false,true);
         }
     }
     public static boolean isVanished(UUID u){

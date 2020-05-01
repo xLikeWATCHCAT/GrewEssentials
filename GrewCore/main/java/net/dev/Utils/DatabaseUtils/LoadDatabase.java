@@ -27,7 +27,7 @@ public class LoadDatabase {
         }},null);
         db.createTables("BlackMessageWarnTimes",new KeyValue(){{
             this.add("uuid","LONGTEXT");
-            this.add("times","LONGTEXT");
+            this.add("times","BIGINT");
         }},null);
     }
 }

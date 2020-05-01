@@ -33,6 +33,30 @@ public class TabListType {
     {
         return onlinePlayerListToNameList();
     }
+    public static ArrayList<String> offlinePlayerListToNameUUIDList(Vector<OfflinePlayer> v)
+    {
+        ArrayList<String> ret=new ArrayList<>();
+        for(OfflinePlayer i : v)
+            ret.add(i.getUniqueId().toString());
+        return ret;
+    }
+
+    public static ArrayList<String> getOfflinePlayersNameUUIDList()
+    {
+        return offlinePlayerListToNameUUIDList(VectorUtil.toVector(Bukkit.getOfflinePlayers()));
+    }
+
+    public static ArrayList<String> onlinePlayerListToNameUUIDList()
+    {
+        ArrayList<String> ret=new ArrayList<>();
+        for(Player i : Bukkit.getOnlinePlayers())
+            ret.add(i.getUniqueId().toString());
+        return ret;
+    }
+    public static ArrayList<String> getOnlinePlayersNameUUIDList()
+    {
+        return onlinePlayerListToNameUUIDList();
+    }
 
     public static Vector<String> getFileType(){
         Vector<String> ret=new Vector<>();
