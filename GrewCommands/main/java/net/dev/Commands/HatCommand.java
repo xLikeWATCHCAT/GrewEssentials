@@ -2,8 +2,8 @@ package net.dev.Commands;
 
 import net.dev.*;
 import net.dev.Utils.LogUtils.*;
+import net.dev.Utils.PlayerUtils.*;
 import net.dev.Utils.StringUtils.*;
-import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
@@ -22,10 +22,10 @@ public class HatCommand implements CommandExecutor {
                             inv.setHelmet(held);
                             p.setItemInHand(helm);
                             p.updateInventory();
-                            sender.sendMessage(StringUtils.translateColorCodes(p,GrewEssentials.getInstance().Message.getString("Hat.Success").replace("$prefix",StringUtils.Prefix)));
+                            PlayerUtil.sendMessage(p,GrewEssentials.getInstance().Message.getString("Hat.Success"));
                             LogUtils.writeLog(GrewEssentials.getInstance().log.getString("Hat").replace("$player",p.getName()).replace("$playeruuid",p.getUniqueId().toString()).replace("$playerip",p.getAddress().getHostName()).replace("$playerisop",String.valueOf(p.isOp())));
                         }catch (Throwable e){
-                            sender.sendMessage(StringUtils.translateColorCodes(p, GrewEssentials.getInstance().Message.getString("Hat.None").replace("$prefix",StringUtils.Prefix)));
+                            PlayerUtil.sendMessage(p,GrewEssentials.getInstance().Message.getString("Hat.None"));
                         }
                 } else {
                     sender.sendMessage(StringUtils.OnlyPlayer);

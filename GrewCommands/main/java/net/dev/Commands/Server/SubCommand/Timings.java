@@ -3,6 +3,7 @@ package net.dev.Commands.Server.SubCommand;
 import com.google.gson.*;
 import net.dev.*;
 import net.dev.Utils.CommandUtils.*;
+import net.dev.Utils.PlayerUtils.*;
 import net.dev.Utils.StringUtils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -20,13 +21,13 @@ public class Timings implements IChildCommand {
             if(args[1].equalsIgnoreCase("start")){
                 ((SimplePluginManager) Bukkit.getPluginManager()).useTimings(true);
                 CustomTimingsHandler.reload();
-                sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("ServerManager.Timings.Start")).replace("$prefix",StringUtils.Prefix));
+                PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("ServerManager.Timings.Start"));
             }else if(args[1].equalsIgnoreCase("paste")){
                 if (!Bukkit.getServer().getPluginManager().useTimings()) {
                     sender.sendMessage(StringUtils.getCommandInfo("server"));
                     return true;
                 }
-                sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("ServerManager.Timings.Paste")).replace("$prefix",StringUtils.Prefix));
+                PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("ServerManager.Timings.Paste"));
                 long timingsstarttime = System.nanoTime() - org.bukkit.command.defaults.TimingsCommand.timingStart;
                 int inta = 0;
                 File timings = new File("timings");
@@ -49,7 +50,7 @@ public class Timings implements IChildCommand {
                 (new PasteThread(sender, bytearrayoutputstream)).start();
             }else if(args[1].equalsIgnoreCase("stop")){
                 ((SimplePluginManager) Bukkit.getPluginManager()).useTimings(false);
-                sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("ServerManager.Timings.Stop")).replace("$prefix",StringUtils.Prefix));
+                PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("ServerManager.Timings.Stop"));
             }else{
                 sender.sendMessage(StringUtils.getCommandInfo("server"));
             }
@@ -106,10 +107,10 @@ public class Timings implements IChildCommand {
                 JsonObject json = (new Gson()).fromJson(new InputStreamReader(url.getInputStream()), JsonObject.class);
                 url.getInputStream().close();
                 String key = json.get("key").getAsString();
-                this.sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("ServerManager.Timings.PasteSuccess")).replace("$prefix",StringUtils.Prefix).replace("$url","https://www.spigotmc.org/go/timings?url=" + key));
+                PlayerUtil.sendMessage(this.sender,GrewEssentials.getInstance().Message.getString("ServerManager.Timings.PasteSuccess").replace("$url","https://www.spigotmc.org/go/timings?url=" + key));
             } catch (IOException e) {
                 e.printStackTrace();
-                this.sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("ServerManager.Timings.PasteFailed")).replace("$prefix",StringUtils.Prefix));
+                PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("ServerManager.Timings.PasteFailed"));
             }
         }
     }

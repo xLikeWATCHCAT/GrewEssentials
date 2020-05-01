@@ -3,6 +3,7 @@ package net.dev.Commands.Player.SubCommand;
 import net.dev.API.*;
 import net.dev.*;
 import net.dev.Utils.CommandUtils.*;
+import net.dev.Utils.PlayerUtils.*;
 import net.dev.Utils.StringUtils.*;
 import org.bukkit.command.*;
 
@@ -14,12 +15,9 @@ public class UUID implements IChildCommand {
         if(args.length == 2){
             String uuid = args[1];
             try{
-                sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("PlayerInfo.UUIDMessageGui"))
-                        .replace("$uuid", uuid)
-                        .replace("$realname",PlayerInfo.getPlayerName(uuid))
-                        .replace("$ip",PlayerInfo.getPlayerIPUUID(uuid)));
+                PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("PlayerInfo.UUIDMessageGui").replace("$uuid", uuid).replace("$realname",PlayerInfo.getPlayerName(uuid)).replace("$ip",PlayerInfo.getPlayerIPUUID(uuid)));
             }catch (Throwable e){
-                sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("PlayerInfo.Failed")).replace("$playername",uuid).replace("$name",uuid).replace("$info",uuid));
+                PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("PlayerInfo.Failed").replace("$playername",uuid).replace("$name",uuid).replace("$info",uuid));
             }
         }else{
             sender.sendMessage(StringUtils.getCommandInfo("player"));
@@ -31,7 +29,7 @@ public class UUID implements IChildCommand {
     @Override
     public Vector<String> getArgumentsDescriptions()
     {
-        return VectorUtil.toVector("player");
+        return VectorUtil.toVector("onlineplayeruuid");
     }
     @Override
     public String getPermission() { return GrewEssentials.getInstance().Config.getString("Permissions.PlayerInfo"); }

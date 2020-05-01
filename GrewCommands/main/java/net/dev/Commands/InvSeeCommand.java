@@ -2,6 +2,7 @@ package net.dev.Commands;
 
 import net.dev.*;
 import net.dev.Utils.LogUtils.*;
+import net.dev.Utils.PlayerUtils.*;
 import net.dev.Utils.StringUtils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -29,11 +30,6 @@ public class InvSeeCommand implements CommandExecutor{
                         sender.sendMessage(StringUtils.getCommandInfo("invsee"));
                         return true;
                     }
-                    /*if(Objects.equals(target,p))
-                    {
-                        p.sendMessage("你不能打开自己的Inventory");
-                        return true;
-                    }*/
                     Inventory inv;
                     inv = Bukkit.createInventory(null,45);
                     for(int i=0;i<4;i++)
@@ -42,7 +38,7 @@ public class InvSeeCommand implements CommandExecutor{
                         inv.setItem(i,target.getInventory().getContents()[i-9]);
                     ivs.put(inv,target);
                     p.openInventory(inv);
-                    sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("InvSee.Message").replace("$playername",target.getName()).replace("$prefix",StringUtils.Prefix)));
+                    PlayerUtil.sendMessage(p,GrewEssentials.getInstance().Message.getString("InvSee.Message").replace("$playername",target.getName()));
                     LogUtils.writeLog(StringUtils.removeColorCodes(GrewEssentials.getInstance().log.getString("InvSee").replace("$player",sender.getName()).replace("$playeruuid",((Player) sender).getUniqueId().toString()).replace("$playerip", ((Player) sender).getAddress().getHostName()).replace("$playerisop",String.valueOf(sender.isOp())).replace("$lookplayer",target.getName()).replace("$lookplayeruuid",target.getUniqueId().toString()).replace("$lookplayerip", target.getAddress().getHostName()).replace("$lookplayerisop",String.valueOf(target.isOp()))));
                     return true;
                 }else{

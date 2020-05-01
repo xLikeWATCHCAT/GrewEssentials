@@ -3,6 +3,7 @@ package net.dev.Commands.Player.SubCommand;
 import net.dev.API.*;
 import net.dev.*;
 import net.dev.Utils.CommandUtils.*;
+import net.dev.Utils.PlayerUtils.*;
 import net.dev.Utils.StringUtils.*;
 import org.bukkit.command.*;
 
@@ -14,14 +15,9 @@ public class Name implements IChildCommand {
         if(args.length == 2){
             String name = args[1];
             try{
-                sender.sendMessage(StringUtils.translateColorCodes(
-                        GrewEssentials.getInstance().Message.getString("PlayerInfo.NameMessageGui"))
-                        .replace("$uuid", PlayerInfo.getPlayerUUID(name))
-                        .replace("$playername",name)
-                        .replace("$realname",PlayerInfo.getPlayerName(PlayerInfo.getPlayerUUID(name)))
-                        .replace("$ip",PlayerInfo.getPlayerIP(name)));
+                PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("PlayerInfo.NameMessageGui").replace("$uuid", PlayerInfo.getPlayerUUID(name)).replace("$playername",name).replace("$realname",PlayerInfo.getPlayerName(PlayerInfo.getPlayerUUID(name))).replace("$ip",PlayerInfo.getPlayerIP(name)));
             }catch (Throwable e){
-                sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("PlayerInfo.Failed")).replace("$playername",name).replace("$name",name).replace("$info",name));
+                PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("PlayerInfo.Failed").replace("$playername",name).replace("$name",name).replace("$info",name));
             }
             }else{
             sender.sendMessage(StringUtils.getCommandInfo("player"));

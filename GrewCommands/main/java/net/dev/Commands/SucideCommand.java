@@ -2,6 +2,7 @@ package net.dev.Commands;
 
 import net.dev.*;
 import net.dev.Utils.LogUtils.*;
+import net.dev.Utils.PlayerUtils.*;
 import net.dev.Utils.StringUtils.*;
 import net.dev.Utils.*;
 import org.bukkit.command.*;
@@ -16,7 +17,9 @@ public class SucideCommand implements CommandExecutor {
                     if(GrewEssentials.getInstance().Message.getBoolean("Sucide.BroadCast")){
                         Utils.BroadCast(GrewEssentials.getInstance().Message.getString("Sucide.BroadCastMessage").replace("$prefix",StringUtils.Prefix).replace("$playername",sender.getName()));
                     }
-                    sender.sendMessage(StringUtils.translateColorCodes((Player)sender,GrewEssentials.getInstance().Message.getString("Sucide.Message")));
+                    Player p = (Player) sender;
+                    p.setHealth(0);
+                    PlayerUtil.sendMessage(p,GrewEssentials.getInstance().Message.getString("Sucide.Message"));
                     LogUtils.writeLog(StringUtils.removeColorCodes(GrewEssentials.getInstance().log.getString("Sucide").replace("$player",sender.getName()).replace("$playeruuid",((Player) sender).getUniqueId().toString()).replace("$playerip", ((Player) sender).getAddress().getHostName()).replace("$playerisop",String.valueOf(sender.isOp()))));
                 }
             }else{

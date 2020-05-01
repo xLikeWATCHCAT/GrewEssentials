@@ -3,6 +3,7 @@ package net.dev.Commands.Warp;
 import net.dev.File.struct.*;
 import net.dev.*;
 import net.dev.Utils.CommandUtils.*;
+import net.dev.Utils.PlayerUtils.*;
 import net.dev.Utils.StringUtils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -25,17 +26,12 @@ public class WarpCommand implements CommandWithCompleter {
                             sender.sendMessage(StringUtils.translateColorCodes(p,GrewEssentials.getInstance().Message.getString("Warp.Failed")).replace("$prefix",StringUtils.Prefix).replace("$warpname",warpName));
                             return true;
                         }
-                        /*if(!GrewEssentials.getInstance().data.getConfig().data.get(warpName).enabled)
-                        {
-                            sender.sendMessage(StringUtils.translateColorCodes(p,GrewEssentials.getInstance().Message.getString("Warp.Failed")).replace("$prefix",StringUtils.Prefix));
-                            return true;
-                        }*/
                         try{
                             WarpConfig.WarpPoint wp=GrewEssentials.getInstance().data.getConfig().warps.get(new WarpConfig.Text(warpName));
                             p.teleport(new Location(Bukkit.getWorld(wp.world),wp.x,wp.y,wp.z,wp.yaw,wp.pitch));
-                            sender.sendMessage(StringUtils.translateColorCodes(p,GrewEssentials.getInstance().Message.getString("Warp.Success")).replace("$prefix",StringUtils.Prefix).replace("$warpname",warpName));
+                            PlayerUtil.sendMessage(p,GrewEssentials.getInstance().Message.getString("Warp.Success").replace("$warpname",warpName));
                         }catch (Throwable e){
-                            sender.sendMessage(StringUtils.translateColorCodes(p,GrewEssentials.getInstance().Message.getString("Warp.Failed")).replace("$prefix",StringUtils.Prefix));
+                            PlayerUtil.sendMessage(p,GrewEssentials.getInstance().Message.getString("Warp.Failed").replace("$warpname",warpName));
                         }
                     }else{
                         sender.sendMessage(StringUtils.getCommandInfo("warp"));

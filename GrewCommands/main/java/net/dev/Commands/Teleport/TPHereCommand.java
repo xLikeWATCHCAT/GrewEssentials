@@ -1,6 +1,7 @@
 package net.dev.Commands.Teleport;
 
 import net.dev.*;
+import net.dev.Utils.PlayerUtils.*;
 import net.dev.Utils.StringUtils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -31,7 +32,7 @@ public class TPHereCommand implements CommandExecutor {
                                 return true;
                             }
                             teleportplayer.teleport(p.getLocation());
-                            sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("TelePort.TPHERE.Success")).replace("$prefix",StringUtils.Prefix).replace("$player",p.getName()).replace("$playername",p.getName()).replace("$teleportplayer",teleportplayer.getName()).replace("$teleportplayername",teleportplayer.getName()));
+                            PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("TelePort.TPHERE.Success").replace("$player",p.getName()).replace("$playername",p.getName()).replace("$teleportplayer",teleportplayer.getName()).replace("$teleportplayername",teleportplayer.getName()));
                         }else{
                             sender.sendMessage(StringUtils.getCommandInfo("tphere"));
                         }

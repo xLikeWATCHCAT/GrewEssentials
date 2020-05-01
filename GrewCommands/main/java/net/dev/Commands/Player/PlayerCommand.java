@@ -77,8 +77,8 @@ public class PlayerCommand implements CommandWithCompleter {
                 if(desc==null)
                 {
                     return ListUtil.toList(argType.getSimpleName());
-                }else if(desc.equalsIgnoreCase("offlineplayer")){
-                    return getOfflinePlayersNameList();
+                }else if(desc.equalsIgnoreCase("onlineplayeruuid")){
+                    return getOnlinePlayersNameUUIDList();
                 }else if(desc.equalsIgnoreCase("onlineplayer")){
                     return getOnlinePlayersNameList();
                 }else{

@@ -2,6 +2,7 @@ package net.dev.Commands;
 
 import net.dev.*;
 import net.dev.Utils.LogUtils.*;
+import net.dev.Utils.PlayerUtils.*;
 import net.dev.Utils.StringUtils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -12,15 +13,14 @@ public class KickAllCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if(GrewEssentials.getInstance().Message.getBoolean("KickAll.Enable")){
             if (command.getName().equalsIgnoreCase("kickall")) {
+                int online = Bukkit.getOnlinePlayers().size();
                 if (sender.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.KickAll")) || sender.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.All"))){
                     //如果除了执行者没有其他玩家就没必要运行下面的代码了
-
                     if((sender instanceof Player && Bukkit.getServer().getOnlinePlayers().size() == 1)//由玩家执行的情况
                             || Bukkit.getServer().getOnlinePlayers().size() == 0){//由后台或命令方块执行的情况
                         sender.sendMessage(StringUtils.NoHavePlayer);
                         return true;
                     }
-
                     StringBuilder reason = new StringBuilder();//使用StringBuilder处理String合并会更快
                     if (args.length > 0) {//如果有写理由
                         //理由可能出现空格，遍历所有理由
@@ -51,7 +51,9 @@ public class KickAllCommand implements CommandExecutor {
                             }
                         }
                     }
-                    sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("KickAll.All")).replace("$prefix",StringUtils.Prefix));//成功踢出
+                    if(sender instanceof Player)
+                        online = online - 1;
+                    PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("KickAll.All").replace("$size",String.valueOf(online)));
                     return true;
                 }else {
                     sender.sendMessage(StringUtils.DoNotHavePerMission);

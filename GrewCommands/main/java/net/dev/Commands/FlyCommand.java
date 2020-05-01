@@ -4,6 +4,7 @@ import net.dev.Database.*;
 import net.dev.*;
 import net.dev.Utils.DatabaseUtils.*;
 import net.dev.Utils.LogUtils.*;
+import net.dev.Utils.PlayerUtils.*;
 import net.dev.Utils.StringUtils.*;
 import net.dev.Utils.*;
 import org.bukkit.*;
@@ -66,10 +67,11 @@ public class FlyCommand implements CommandExecutor{
             pip = ((Player) s).getAddress().getHostName();
         }
         if (t.getAllowFlight()) {
+            t.setFlying(false);
             if (t.getGameMode() == GameMode.CREATIVE) {
-                s.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Fly.Gamemode_Creative")).replace("$playername",t.getName()).replace("$prefix", StringUtils.Prefix));
+                PlayerUtil.sendMessage(s,GrewEssentials.getInstance().Message.getString("Fly.Gamemode_Creative").replace("$playername",t.getName()));
             } else if (t.getGameMode() == GameMode.SPECTATOR) {
-                s.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Fly.Gamemode_Spectator")).replace("$playername",t.getName()).replace("$prefix", StringUtils.Prefix));
+                PlayerUtil.sendMessage(s,GrewEssentials.getInstance().Message.getString("Fly.Gamemode_Spectator").replace("$playername",t.getName()));
             }else {
                 t.setAllowFlight(false);
                 if(fly==null) {
@@ -83,8 +85,7 @@ public class FlyCommand implements CommandExecutor{
                 else{
                     LoadDatabase.db.dbUpdate("CommandsEnable",new KeyValue(){{ this.add("fly","0"); }},new KeyValue(){{ this.add("uuid",t.getUniqueId().toString()); }});
                 }
-                t.setFlying(false);
-                s.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Fly.Disable_Message")).replace("$playername",t.getName()).replace("$prefix", StringUtils.Prefix));
+                PlayerUtil.sendMessage(s,GrewEssentials.getInstance().Message.getString("Fly.Disable_Message").replace("$playername",t.getName()));
                 LogUtils.writeLog(GrewEssentials.getInstance().log.getString("DisbleFly").replace("$player",pn).replace("$flyplayer",t.getName()).replace("$playeruuid",puuid).replace("$playerip",pip).replace("$playerisop",String.valueOf(s.isOp())).replace("$flyplayeruuid",t.getUniqueId().toString()).replace("$flyplayerip",t.getAddress().getHostName()).replace("$flyplayerisop",String.valueOf(t.isOp())));
             }
         } else {
@@ -104,7 +105,7 @@ public class FlyCommand implements CommandExecutor{
                     this.add("uuid",t.getUniqueId().toString());
                 }});
             }
-            s.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Fly.Enable_Message")).replace("$playername",t.getName()).replace("$prefix", StringUtils.Prefix));
+            PlayerUtil.sendMessage(s,GrewEssentials.getInstance().Message.getString("Fly.Enable_Message").replace("$playername",t.getName()));
             LogUtils.writeLog(GrewEssentials.getInstance().log.getString("EnableFly").replace("$player",pn).replace("$flyplayer",t.getName()).replace("$playeruuid",puuid).replace("$playerip",pip).replace("$playerisop",String.valueOf(s.isOp())).replace("$flyplayeruuid",t.getUniqueId().toString()).replace("$flyplayerip",t.getAddress().getHostName()).replace("$flyplayerisop",String.valueOf(t.isOp())));
         }
     }

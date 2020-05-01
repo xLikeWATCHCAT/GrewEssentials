@@ -3,6 +3,7 @@ package net.dev.Commands.Warp;
 import net.dev.File.struct.*;
 import net.dev.*;
 import net.dev.Utils.CommandUtils.*;
+import net.dev.Utils.PlayerUtils.*;
 import net.dev.Utils.StringUtils.*;
 import org.bukkit.command.*;
 
@@ -18,20 +19,15 @@ public class RemoveWarpCommand implements CommandWithCompleter {
                     String warpName = args[0];
                     if(!GrewEssentials.getInstance().data.getConfig().warps.containsKey(new WarpConfig.Text(warpName)))
                     {
-                        sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("RemoveWarp.Failed")).replace("$prefix",StringUtils.Prefix).replace("$warpname",warpName));
+                        PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("RemoveWarp.Failed").replace("$warpname",warpName));
                         return true;
                     }
-                    /*if(!GrewEssentials.getInstance().data.getConfig().data.get(warpName).enabled)
-                    {
-                        sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("RemoveWarp.Failed")).replace("$prefix",StringUtils.Prefix));
-                        return true;
-                    }*/
                     try{
                         GrewEssentials.getInstance().data.getConfig().warps.remove(new WarpConfig.Text(warpName));
                         GrewEssentials.getInstance().data.saveConfig();
-                        sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("RemoveWarp.Success")).replace("$prefix",StringUtils.Prefix).replace("$warpname",warpName));
+                        PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("RemoveWarp.Success").replace("$warpname",warpName));
                     }catch (Throwable e){
-                        sender.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("RemoveWarp.Failed")).replace("$prefix",StringUtils.Prefix).replace("$warpname",warpName));
+                        PlayerUtil.sendMessage(sender,GrewEssentials.getInstance().Message.getString("RemoveWarp.Failed").replace("$warpname",warpName));
                     }
                 }else{
                     sender.sendMessage(StringUtils.getCommandInfo("removewarp"));

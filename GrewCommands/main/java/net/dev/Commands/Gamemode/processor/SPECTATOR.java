@@ -2,26 +2,22 @@ package net.dev.Commands.Gamemode.processor;
 
 import net.dev.*;
 import net.dev.Utils.LogUtils.*;
+import net.dev.Utils.PlayerUtils.*;
 import net.dev.Utils.StringUtils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
-
-import static net.dev.Utils.StringUtils.StringUtils.*;
 
 public class SPECTATOR{
     public static String getPermission() { return GrewEssentials.getInstance().Config.getString("Permissions.Gamemode.SPECTATOR"); }
 
     public static void setPlayerGamemodeToSPECTATOR(Player p,CommandSender b){
         if (p.getGameMode() == GameMode.SPECTATOR) {
-            b.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Gamemode.Presence_Message"))
-                    .replace("$playername", p.getName())
-                    .replace("$prefix", Prefix)
-                    .replace("$type",StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Gamemode.Spectator.Type"))));
+            PlayerUtil.sendMessage(b,GrewEssentials.getInstance().Message.getString("Gamemode.Presence_Message").replace("$type",GrewEssentials.getInstance().Message.getString("Gamemode.Spectator.Type")).replace("$playername",p.getName()).replace("$player",p.getName()));
             return;
         }
         p.setGameMode(GameMode.SPECTATOR);
-        b.sendMessage(StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Gamemode.Message")).replace("$prefix", StringUtils.Prefix).replace("$playername",p.getName()).replace("$type",StringUtils.translateColorCodes(GrewEssentials.getInstance().Message.getString("Gamemode.Spectator.Type"))));
+        PlayerUtil.sendMessage(b,GrewEssentials.getInstance().Message.getString("Gamemode.Message").replace("$type",GrewEssentials.getInstance().Message.getString("Gamemode.Spectator.Type")).replace("$playername",p.getName()).replace("$player",p.getName()));
         if(b instanceof Player){
             Player a = (Player) b;
             LogUtils.writeLog(StringUtils.removeColorCodes(GrewEssentials.getInstance().log.getString("Gamemode").replace("$player",p.getName()).replace("$type",StringUtils.removeColorCodes(GrewEssentials.getInstance().Message.getString("Gamemode.Spectator.Type"))).replace("$doplayer",a.getName()).replace("$playeruuid",p.getUniqueId().toString()).replace("$playerip",p.getAddress().getHostName()).replace("$playerisop",String.valueOf(p.isOp())).replace("$doplayeruuid",a.getUniqueId().toString()).replace("$doplayerip",a.getAddress().getHostName()).replace("$doplayerisop",String.valueOf(a.isOp()))));

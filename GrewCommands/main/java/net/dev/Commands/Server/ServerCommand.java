@@ -55,6 +55,7 @@ public class ServerCommand implements CommandWithCompleter{
     public void initChildCommands()
     {
         addChildCmd(new Timings());
+        addChildCmd(new Info());
     }
     public List<String> realOnTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if(args.length<=1)
