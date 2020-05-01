@@ -11,12 +11,16 @@ import org.bukkit.event.*;
 import org.bukkit.event.player.*;
 import org.bukkit.potion.*;
 
+import java.lang.reflect.*;
 import java.util.*;
 import java.util.concurrent.atomic.*;
 
+import static net.dev.Commands.VanishCommand.*;
+import static net.dev.ReflectionWrapper.*;
 import static net.dev.Utils.PlayerUtils.FlyUtils.FlyUtils.*;
 import static net.dev.Utils.PlayerUtils.VanishUtils.VanishUtils.*;
 import static net.dev.Utils.StringUtils.StringUtils.*;
+import static net.dev.Utils.Utils.*;
 
 public class PlayerJoinListener implements Listener {
     @EventHandler (priority = EventPriority.HIGHEST)
@@ -24,27 +28,25 @@ public class PlayerJoinListener implements Listener {
         Player p = event.getPlayer();
         UUID u =p.getUniqueId();
         try{
-            new Thread(()->{
-                if(GrewEssentials.getInstance().Message.getBoolean("Fly.Fly_Allow")){
-                    if(isFlight(u)){
-                        if(GrewEssentials.getInstance().Message.getBoolean("Fly.Fly_Permission")){
-                            if (p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.Fly.Self")) || p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.All"))){
-                                try {
-                                    enableFlight(p);
-                                } catch (Throwable throwable) {
-                                    throwable.printStackTrace();
-                                }
-                            }
-                        }else{
+            if(GrewEssentials.getInstance().Message.getBoolean("Fly.Fly_Allow")){
+                if(isFlight(u)){
+                    if(GrewEssentials.getInstance().Message.getBoolean("Fly.Fly_Permission")){
+                        if (p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.Fly.Self")) || p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.All"))){
                             try {
                                 enableFlight(p);
                             } catch (Throwable throwable) {
                                 throwable.printStackTrace();
                             }
                         }
+                    }else{
+                        try {
+                            enableFlight(p);
+                        } catch (Throwable throwable) {
+                            throwable.printStackTrace();
+                        }
                     }
                 }
-            }).start();
+            }
         }catch (Throwable e){ }
     }
 
@@ -53,12 +55,22 @@ public class PlayerJoinListener implements Listener {
         Player p = event.getPlayer();
         UUID u = p.getUniqueId();
         try{
+            if (!p.hasPermission(GrewEssentials.getInstance().Config.getString("Permissions.Vanish.See"))) {
+                for(Player vanishPlayers:VanishPlayerInThisServerList){
+                        p.hidePlayer(vanishPlayers);
+                    Object NMSPlayer=invokeMethod(getHandle,vanishPlayers);
+                    Class<?> action=getInnerClass(getNMSClass("PacketPlayOutPlayerInfo"),"EnumPlayerInfoAction");
+                    Object ps= Array.newInstance(NMSPlayer.getClass(),1);
+                    Object pack=newInstance(getConstructor(getNMSClass("PacketPlayOutPlayerInfo"),action, ps.getClass()),Enum.valueOf((Class)action,"REMOVE_PLAYER"),ps);
+                    sendPacketToAllPlayers(pack);
+                    }
+            }
+        }catch (Throwable e){}
+        try{
             if(GrewEssentials.getInstance().Message.getBoolean("Vanish.Enable")){
                 if(isVanished(u)){
                     event.setJoinMessage("§f");
-                    new Thread(()->{
-                        vanishedset(event);
-                    }).start();
+                    vanishedset(event);
                 }
             }else{
                 p.removePotionEffect(PotionEffectType.INVISIBILITY);

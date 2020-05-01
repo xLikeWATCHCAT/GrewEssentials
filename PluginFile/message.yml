@@ -44,9 +44,14 @@ Help:
   Mid: "&6»"
   #Help最前面的显示内容和最后面的显示内容 "\n"换行
   #$prefix加或者不加都无所谓，因为检测的时候会将Prefix自动加上，然后$prefix会被替换
-  Help_First_Message: "§7===== §6[ §e§lGrewEntails §6] &b<$page_now/$page_all>§7====="
-  Previous: "§7=====§b <<<&e 上一页 &b>>> §7====="
-  Next_Page: "§7=====§b <<<&e 下一页 &b>>> §7====="
+  Help_First_Message: "&7&l&m----- §6[ &e&lGrewEntails &6] &b<$page_now/$page_all>&7&l&m-----"
+  Help_End_Message_First: "&7&l&m----- §6[ "
+  Help_End_Message_End: " &6] &7&l&m-----"
+  Help_End_Message_Mid: " &e| "
+  Previous: "&a&l上一页"
+  Previous_Hover: "&7点击切换到 &a&l上一页"
+  Next_Page: "&b&l下一页"
+  Next_Page_Hover: "&7点击切换到 &b&l下一页"
   Cant_Find: "$prefix&c指定的页面不存在！"
 
 Version:
@@ -54,8 +59,8 @@ Version:
 
 Reload:
   #重载成功的提示信息。
-  Message: "$prefix&a$pluginname插件已重载并且自动备份！"
-  File: "$prefix&a$pluginname插件已重载配置 &b$file &a并且自动备份！"
+  Message: "$prefix&a$pluginname插件已重载"
+  File: "$prefix&a$pluginname插件已重载配置 &b$file"
   Database: "$prefix&a你已成功重载数据库！"
   Usage: "$prefix&7/greload filetype <File>"
   Usage_Explanation: "重载配置文件"
@@ -208,22 +213,36 @@ ServerManager:
   Usage_Explanation: "检测服务器报告"
 
   Info:
-    GenerationTime: "生成时间:"
-    PluginVersion: "插件版本:"
+    GenerationTime: "生成时间"
+    PluginVersion: "插件版本"
     ServerInfo: "服务器信息"
-    JavaInfo: "Java:"
-    OperatingSystem: "操作系统:"
-    NumberOfProcessors: "处理器数量:"
-    FreeMemory: "空闲内存:"
-    MaximumMemory: "最大内存:"
-    TotalMemory: "总内存:"
-    Server: "服务器:"
-    ServerName: "服务器名:"
-    ServerVersion: "服务器版本:"
-    OnlinePlayers: "在线玩家:"
+    JavaInfo: "Java"
+    OperatingSystem: "操作系统"
+    NumberOfProcessors: "处理器数量"
+    FreeMemory: "空闲内存"
+    MaximumMemory: "最大内存"
+    TotalMemory: "总内存"
+    Server: "服务器"
+    ServerName: "服务器名"
+    ServerVersion: "服务器版本"
+    OnlinePlayers: "在线玩家"
     PluginList: "插件列表"
-    Error: "在收集报告信息时发生异常错误"
-    End: ">> 报告结束"
+    Error: "&c在收集报告信息时发生异常错误"
+    End: ">>"
+    InfoGui: |-
+      &a本次服务器性能报告结束,性能如下：
+      &d$generationtime:&c$reportgenerationtime
+      &b$javainfo:&a$reportjavainfo
+      &b$operatingsystem:&a$reportoperatingsystem
+      &b$numberofprocessors:&a$reportnumberofprocessors
+      &b$freememory:&a$reportfreememory
+      &b$maximummemory:&a$reportmaximummemory
+      &b$totalmemory:&a$reporttotalmemory
+      &b$Server:&a$reportServer
+      &b$servername:&a$reportservername
+      &b$serverversion:&a$reportserverversion
+      &b$onlineplayers:&a$reportonlineplayers
+      &c$end
 
   Timings:
     Start: "$prefix&c开始记录服务器性能，过段时间后输入/server timings paste"
@@ -254,19 +273,19 @@ Warp:
   Enable: true
   Usage: "$prefix&7/Warp"
   Usage_Explanation: "使玩家传送到已设置的坐标"
-  Failed: "$prefix&c未知坐标$warpname，无法传送！"
-  Success: "$prefix&c您已传送至坐标$warpname！"
+  Failed: "$prefix&c未知坐标&b$warpname&c，无法传送！"
+  Success: "$prefix&c您已传送至坐标&b$warpname&c！"
 
 SetWarp:
   Usage: "$prefix&7/SetWarp"
   Usage_Explanation: "设置玩家传送的坐标"
-  Success: "$prefix&c设置坐标$warpname成功！"
+  Success: "$prefix&c设置坐标&b$warpname&c成功！"
   Failed: "$prefix&c设置坐标失败，未知原因"
 
 RemoveWarp:
   Usage: "$prefix&7/RemoveWarp"
   Usage_Explanation: "删除已设置的玩家传送的坐标"
-  Success: "$prefix&c删除坐标$warpname成功！"
+  Success: "$prefix&c删除坐标&b$warpname&c成功！"
   Failed: "$prefix&c删除坐标失败，未知原因"
 
 PlayerInfo:
@@ -336,6 +355,18 @@ TelePort:
     Usage_Explanation: "使指定的在线玩家传送到指定的玩家的位置"
     Enable: true
     Success: "$prefix &c你已成功将&b$teleportplayer&c传送到$player的身边"
+  TPA:
+    Usage: "$prefix&7/TPA <player>"
+    Usage_Explanation: "请求指定的在线玩家传送到你现在的位置"
+    Enable: true
+    #请求过期时间，单位秒
+    Timeout: 180
+  TPACCEPT:
+    Usage: "$prefix&7/TPACCEPT <player>"
+    Usage_Explanation: "同意传送请求"
+  TPDENY:
+    Usage: "$prefix&7/TPDENY <player>"
+    Usage_Explanation: "拒绝传送请求"
 
 BlackMessage:
   Enable: true
@@ -344,18 +375,3 @@ BlackMessage:
   WarnMaxTimes: 20
   Commands:
     - "mute $player 30s 言语过激。"
-
-Titles:
-  DEFAULT:
-    #title顺序(将按照从小到大依次检测 比如 1-50 优先检测 1 符合则显示 不符合 检测 2 ...)
-    index: 50
-    #留空或删除表示不检测权限
-    permission: ""
-    MainTitle: "&3欢迎来到"
-    SubTitle: "&3我的服务器"
-    #淡化出现时间(毫秒)
-    FadeIn: 100
-    #停留时间(毫秒)
-    Stay: 100
-    #淡化消失时间(毫秒)
-    FadeOut: 100

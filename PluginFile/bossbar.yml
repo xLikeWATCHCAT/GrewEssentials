@@ -19,7 +19,6 @@ per-world:
   world: "barname"
 
 bars:
-#小心动态BossBar卡服！
   DEFAULT:
     #权限 默认无
     permission: ""

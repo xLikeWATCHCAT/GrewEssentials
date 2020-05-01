@@ -4,9 +4,7 @@ import net.dev.API.*;
 import org.bukkit.*;
 
 public class EconomyHook {
-    public static void add(OfflinePlayer p, double d) {
-        InternalPluginBridge.handle().economyGive(p, d);
-    }
+    public static void add(OfflinePlayer p, double d) { InternalPluginBridge.handle().economyGive(p, d); }
 
     public static void remove(OfflinePlayer p, double d) {
         InternalPluginBridge.handle().economyTake(p, d);

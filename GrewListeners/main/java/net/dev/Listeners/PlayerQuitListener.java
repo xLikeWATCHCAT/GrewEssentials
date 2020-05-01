@@ -18,8 +18,10 @@ public class PlayerQuitListener implements Listener {
     {
         Player p = event.getPlayer();
         UUID u = p.getUniqueId();
-        if(isVanished(u))
+        if(isVanished(u)){
             event.setQuitMessage("");
+            VanishPlayerInThisServerList.remove(p);
+        }
         new Thread(()->{
             BossBar.getIndexesAtomicByPlayer(p,i->{
                 for(AtomicInteger i2 : i)
