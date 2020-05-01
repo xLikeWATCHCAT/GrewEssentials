@@ -1,5 +1,5 @@
 # GrewEssentials
-是由Merganser编写由Nothing和FaintCloudy协助编写。
+是由Merganser编写由Nothing和FaintCloudy协助编写的一款以Java为主编写语言的我的世界服务器Bukkit插件。
 
 ## 问题
 可能仍然存在部分BUG，但请谅解，或许你可以自己更新，或许你可以长久等待我更新。
