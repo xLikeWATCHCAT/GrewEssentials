@@ -1,6 +1,6 @@
 package net.dev.display;
 
-import net.dev.Action.acts.*;
+import net.dev.action.acts.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.inventory.*;
 

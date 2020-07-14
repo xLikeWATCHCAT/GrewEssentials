@@ -1,7 +1,7 @@
 package net.dev.display;
 
-import net.dev.JavaScript.*;
-import net.dev.Utils.StringUtils.*;
+import net.dev.javascript.*;
+import net.dev.utils.string.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.inventory.*;
 
